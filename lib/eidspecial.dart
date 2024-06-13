@@ -1,4 +1,5 @@
 
+import 'package:ecom/widgets/sort-btn.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom/widgets/productcard.dart';
@@ -47,11 +48,22 @@ class EidspecialPage extends StatelessWidget {
           Container(
             padding:
             const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.grey, // Change this to your desired border color
+                    width: 1.0,
+                  ),
+                )),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) => SortFilterBottomSheet(),
+                  );},
                   child: const Text(
                     'Sort & Filter',
                     style: TextStyle(
@@ -84,13 +96,6 @@ class EidspecialPage extends StatelessWidget {
                 ),
               ],
             ),
-            decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: Colors.grey, // Change this to your desired border color
-                    width: 1.0,
-                  ),
-                )),
           ),
           Expanded(
             child: GridView.count(

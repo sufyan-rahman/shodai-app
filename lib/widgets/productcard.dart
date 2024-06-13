@@ -1,4 +1,3 @@
-// lib/widgets/product_card.dart
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -23,44 +22,45 @@ class ProductCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
-
+        side: const BorderSide(color: Colors.grey),
       ),
       elevation: 0,
+      color: Colors.white,
       child: Container(
         width: 200,
         padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              children: [
-                Image.asset(
-                  imagePath,
-                  height: 120,
-                  width: double.infinity,
-                  fit: BoxFit.contain,
-                ),
-                Positioned(
-                  top: 6,
-                  right: 0,
-                  child: IconButton(
-                    iconSize: 25,
-                    icon: const Icon(Icons.favorite_border),
-                    onPressed: () {},
+            Expanded(
+              child: Stack(
+                children: [
+                  Image.asset(
+                    imagePath,
+                    height: 120,
+                    width: double.infinity,
+                    fit: BoxFit.contain,
                   ),
-                ),
-                Positioned(
-                  top: 40,
-                  right: 0,
-                  child: IconButton(
-
-                    icon: Image.asset('assets/icons/list-btn.png', width: 25, height: 25),
-                    onPressed: (){},
-                  )
-                  ,
-                ),
-
-              ],
+                  Positioned(
+                    top: 6,
+                    right: 0,
+                    child: IconButton(
+                      iconSize: 25,
+                      icon: const Icon(Icons.favorite_border),
+                      onPressed: () {},
+                    ),
+                  ),
+                  Positioned(
+                    top: 40,
+                    right: 0,
+                    child: IconButton(
+                      icon: Image.asset('assets/icons/list-btn.png',
+                          width: 25, height: 25),
+                      onPressed: () {},
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 10),
             Text(

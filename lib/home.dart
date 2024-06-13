@@ -1,96 +1,59 @@
+import 'package:ecom/categories.dart';
 import 'package:ecom/eidspecial.dart';
 import 'package:ecom/inspiredby.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'popular.dart';
 import 'package:ecom/widgets/productcard.dart';
+import 'package:ecom/main.dart';
 
+class Home extends StatelessWidget {
+  // const Home({super.key});
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+  final VoidCallback navigateToCategories;
 
-  @override
-  _HomeState createState() => _HomeState();
-}
+  Home({super.key, required this.navigateToCategories});
 
-class _HomeState extends State<Home> {
-  int _selectedIndex = 0;
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Home',
-      style: TextStyle(fontSize: 24),
-    ),
-    Text(
-      'Categories',
-      style: TextStyle(fontSize: 24),
-    ),
-    Text(
-      'Deals',
-      style: TextStyle(fontSize: 24),
-    ),
-    Text(
-      'My Items',
-      style: TextStyle(fontSize: 24),
-    ),
-    Text(
-      'More',
-      style: TextStyle(fontSize: 24),
-    ),
+  final List<Map<String, dynamic>> products = [
+    {
+      'imagePath': 'assets/images/card1.png',
+      'title': 'Orange (South Africa)',
+      'weight': '1kg',
+      'price': '245tk',
+      'buttonText': 'Add to cart',
+      'onPressed': () {},
+    },
+    {
+      'imagePath': 'assets/images/card2.png',
+      'title': 'Gulsha Tengra (Medium)',
+      'weight': '1kg',
+      'price': '450tk',
+      'buttonText': 'Add to cart',
+      'onPressed': () {},
+    },
+    {
+      'imagePath': 'assets/images/card3.png',
+      'title': 'Product 2',
+      'weight': '100kg',
+      'price': '200tk',
+      'buttonText': 'Add to cart',
+      'onPressed': () {},
+    },
+    {
+      'imagePath': 'assets/images/card4.png',
+      'title': 'Product 2',
+      'weight': '100kg',
+      'price': '200tk',
+      'buttonText': 'Add to cart',
+      'onPressed': () {},
+    },
+    // Add more products here
   ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/logo.png'),
-        ),
-        title: const TextField(
-          decoration: InputDecoration(
-            hintText: 'Search Product...',
-            suffixIcon: Icon(Icons.search),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.all(Radius.circular(21.0)),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.all(Radius.circular(21.0)),
-            ),
-            filled: true,
-            fillColor: Colors.white,
-            contentPadding:
-                EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: SizedBox(
-              width: 24,
-              height: 24,
-              child: Image.asset('assets/icons/cart.png'),
-            ),
-            onPressed: () {
-              // Define what happens when the button is pressed
-              if (kDebugMode) {
-                print('Button with image pressed');
-              }
-            },
-          ),
-        ],
-        backgroundColor: const Color(0xFF7D7D00),
-        toolbarHeight: 70.0,
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -109,6 +72,17 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
+
+                  Container(
+                    margin: const EdgeInsets.all(6.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/images/slider_img2.png'),
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
                   //2nd Image of Slider
                 ],
                 //Slider Container properties
@@ -123,7 +97,8 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            Padding(
+            Container(
+              // color: Colors.white,
               padding:
                   const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
               child: Row(
@@ -146,78 +121,41 @@ class _HomeState extends State<Home> {
                       'See More >',
                       style: TextStyle(
                           color: Color(0xFFB3B300),
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w600,
+                      fontSize: 16),
                     ),
                   ),
                 ],
               ),
             ),
+
             SizedBox(
-              height: 325.0, // Set the height of the horizontal ListView
-              child: ListView(
+              height: 300.0,
+              child: ListView.builder(
+
                 scrollDirection: Axis.horizontal,
-                children: [
-                  ProductCard(
-                    imagePath: 'assets/images/card1.png',
-                    title: 'Danish Full Cream Milk Powder',
-                    weight: '1 Kg',
-                    price: '৳609',
-                    buttonText: 'Add to cart',
-                    onPressed: () {
-                      // Add to cart action
-                    },
-                  ),
-                  ProductCard(
-                    imagePath: 'assets/images/card2.png',
-                    title: 'Danish Full Cream Milk Powder',
-                    weight: '1 Kg',
-                    price: '৳609',
-                    buttonText: 'Add to cart',
-                    onPressed: () {
-                      // Add to cart action
-                    },
-                  ),
-                  ProductCard(
-                    imagePath: 'assets/images/card2.png',
-                    title: 'Danish Full Cream Milk Powder',
-                    weight: '1 Kg',
-                    price: '৳609',
-                    buttonText: 'Add to cart',
-                    onPressed: () {
-                      // Add to cart action
-                    },
-                  ),
-                  // buildCard(
-                  //   imagePath: 'assets/images/card1.png',
-                  //   title: 'Danish Full Cream Milk Powder',
-                  //   weight: '1 kg',
-                  //   price: 'Tk. 1200',
-                  //   buttonText: 'Add to Cart',
-                  //   onPressed: (){},
-                  // ),
-                  // buildCard(
-                  //   imagePath: 'assets/images/card2.png',
-                  //   title: 'Nescafe Gold Jar Coffee',
-                  //   weight: '1 kg',
-                  //   price: 'Tk. 1200',
-                  //   buttonText: 'Add to Cart',
-                  //   onPressed: (){},
-                  // ),
-                  // buildCard(
-                  //   imagePath: 'assets/images/card2.png',
-                  //   title: 'Nescafe Gold Jar Coffee',
-                  //   weight: '1 kg',
-                  //   price: 'Tk. 1200',
-                  //   buttonText: 'Add to Cart',
-                  //   onPressed: (){},
-                  // ),
-                  // Add more cards here as needed
-                ],
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ProductCard(
+                      imagePath: product['imagePath']!,
+                      title: product['title']!,
+                      weight: product['weight']!,
+                      price: product['price']!,
+                      buttonText: product['buttonText']!,
+                      onPressed: () {},
+                    ),
+                  );
+                },
               ),
             ),
-            Padding(
+
+            Container(
+              // color: Colors.white,
               padding:
-                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
+              const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -238,53 +176,178 @@ class _HomeState extends State<Home> {
                       'See More >',
                       style: TextStyle(
                           color: Color(0xFFB3B300),
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16),
                     ),
                   ),
                 ],
               ),
             ),
+
             SizedBox(
-              height: 325.0, // Set the height of the horizontal ListView
-              child: ListView(
+              height: 300.0,
+              child: ListView.builder(
+
                 scrollDirection: Axis.horizontal,
-                children: [
-                  ProductCard(
-                    imagePath: 'assets/images/card1.png',
-                    title: 'Danish Full Cream Milk Powder',
-                    weight: '1 Kg',
-                    price: '৳609',
-                    buttonText: 'Add to cart',
-                    onPressed: () {
-                      // Add to cart action
-                    },
-                  ),
-                  ProductCard(
-                    imagePath: 'assets/images/card2.png',
-                    title: 'Danish Full Cream Milk Powder',
-                    weight: '1 Kg',
-                    price: '৳609',
-                    buttonText: 'Add to cart',
-                    onPressed: () {
-                      // Add to cart action
-                    },
-                  ),
-                  ProductCard(
-                    imagePath: 'assets/images/card2.png',
-                    title: 'Danish Full Cream Milk Powder',
-                    weight: '1 Kg',
-                    price: '৳609',
-                    buttonText: 'Add to cart',
-                    onPressed: () {
-                      // Add to cart action
-                    },
-                  ),
-                ],
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ProductCard(
+                      imagePath: product['imagePath']!,
+                      title: product['title']!,
+                      weight: product['weight']!,
+                      price: product['price']!,
+                      buttonText: product['buttonText']!,
+                      onPressed: () {},
+                    ),
+                  );
+                },
               ),
             ),
+
+            Container(
+              color: Colors.white,
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                child: Center(
+                  child: Text(
+                    'Shop by category',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              child: Padding(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              // Navigate to the Fruits & Vegetables category page
+                            },
+                            child: Column(
+                              children: [
+                                Image.asset('assets/images/vegetables.png',
+                                    width: 150, height: 150),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  'Fruits & Vegetables',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              // Navigate to the Baby Care category page
+                            },
+                            child: Column(
+                              children: [
+                                Image.asset('assets/images/baby_care.png',
+                                    width: 150, height: 150),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  'Baby Care',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16), // Space between the rows
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              // Navigate to the Home & Cleaning category page
+                            },
+                            child: Column(
+                              children: [
+                                Image.asset('assets/images/cleaning.png',
+                                    width: 150, height: 150),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  'Home & Cleaning',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              // Navigate to the Meat & Fish category page
+                            },
+                            child: Column(
+                              children: [
+                                Image.asset('assets/images/meat.png',
+                                    width: 150, height: 150),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  'Meat & Fish',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: SizedBox(
+                  width: 370,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      navigateToCategories();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      side: const BorderSide(color: Color(0xFFB3B300)),
+                      backgroundColor: Colors.white, // Background color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 40.0), // Button padding
+                    ),
+                    child: const Text(
+                      'VIEW ALL',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFFB3B300),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
+              const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -322,9 +385,7 @@ class _HomeState extends State<Home> {
                     weight: '1 Kg',
                     price: '৳609',
                     buttonText: 'Add to cart',
-                    onPressed: () {
-                      // Add to cart action
-                    },
+                    onPressed: () {},
                   ),
                   ProductCard(
                     imagePath: 'assets/images/card2.png',
@@ -332,9 +393,7 @@ class _HomeState extends State<Home> {
                     weight: '1 Kg',
                     price: '৳609',
                     buttonText: 'Add to cart',
-                    onPressed: () {
-                      // Add to cart action
-                    },
+                    onPressed: () {},
                   ),
                   ProductCard(
                     imagePath: 'assets/images/card2.png',
@@ -342,48 +401,14 @@ class _HomeState extends State<Home> {
                     weight: '1 Kg',
                     price: '৳609',
                     buttonText: 'Add to cart',
-                    onPressed: () {
-                      // Add to cart action
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),
             ),
-
-
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Categories',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_offer),
-            label: 'Deals',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'My Items',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.more_horiz),
-            label: 'More',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFF7D7D00),
-        unselectedItemColor: Colors.grey,
-        onTap: _onItemTapped,
-      ),
     );
   }
-
 }
-
