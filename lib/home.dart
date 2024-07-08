@@ -1,15 +1,14 @@
-import 'package:ecom/categories.dart';
 import 'package:ecom/eidspecial.dart';
 import 'package:ecom/inspiredby.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'popular.dart';
 import 'package:ecom/widgets/productcard.dart';
-import 'package:ecom/main.dart';
+import 'package:ecom/provider/items_provider.dart';
+import 'package:provider/provider.dart';
+
 
 class Home extends StatelessWidget {
-  // const Home({super.key});
 
   final VoidCallback navigateToCategories;
 
@@ -17,12 +16,14 @@ class Home extends StatelessWidget {
 
   final List<Map<String, dynamic>> products = [
     {
+
       'imagePath': 'assets/images/card1.png',
       'title': 'Orange (South Africa)',
       'weight': '1kg',
       'price': '245tk',
       'buttonText': 'Add to cart',
       'onPressed': () {},
+      'onFavoritePressed': () {}
     },
     {
       'imagePath': 'assets/images/card2.png',
@@ -31,6 +32,7 @@ class Home extends StatelessWidget {
       'price': '450tk',
       'buttonText': 'Add to cart',
       'onPressed': () {},
+      'onFavoritePressed': () {}
     },
     {
       'imagePath': 'assets/images/card3.png',
@@ -39,6 +41,7 @@ class Home extends StatelessWidget {
       'price': '200tk',
       'buttonText': 'Add to cart',
       'onPressed': () {},
+      'onFavoritePressed': () {}
     },
     {
       'imagePath': 'assets/images/card4.png',
@@ -47,18 +50,21 @@ class Home extends StatelessWidget {
       'price': '200tk',
       'buttonText': 'Add to cart',
       'onPressed': () {},
+      'onFavoritePressed': () {}
     },
     // Add more products here
   ];
 
   @override
   Widget build(BuildContext context) {
+    // final itemsProvider = Provider.of<ItemsProvider>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
-              height: 180.0, // Set the height of the CarouselSlider
+              height: MediaQuery.of(context).size.height * 0.2, // Set the height of the CarouselSlider
               child: CarouselSlider(
                 items: [
                   //1st Image of Slider
@@ -122,17 +128,15 @@ class Home extends StatelessWidget {
                       style: TextStyle(
                           color: Color(0xFFB3B300),
                           fontWeight: FontWeight.w600,
-                      fontSize: 16),
+                          fontSize: 16),
                     ),
                   ),
                 ],
               ),
             ),
-
             SizedBox(
               height: 300.0,
               child: ListView.builder(
-
                 scrollDirection: Axis.horizontal,
                 itemCount: products.length,
                 itemBuilder: (context, index) {
@@ -145,17 +149,22 @@ class Home extends StatelessWidget {
                       weight: product['weight']!,
                       price: product['price']!,
                       buttonText: product['buttonText']!,
-                      onPressed: () {},
+                      onPressed: product['onPressed']!,
+                      onFavoritePressed: () {
+                        final favoritesProvider =
+                            Provider.of<FavoritesProvider>(context,
+                                listen: false);
+                        favoritesProvider.addFavorite(product);
+                      },
                     ),
                   );
                 },
               ),
             ),
-
             Container(
               // color: Colors.white,
               padding:
-              const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
+                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -183,11 +192,9 @@ class Home extends StatelessWidget {
                 ],
               ),
             ),
-
             SizedBox(
               height: 300.0,
               child: ListView.builder(
-
                 scrollDirection: Axis.horizontal,
                 itemCount: products.length,
                 itemBuilder: (context, index) {
@@ -200,13 +207,19 @@ class Home extends StatelessWidget {
                       weight: product['weight']!,
                       price: product['price']!,
                       buttonText: product['buttonText']!,
-                      onPressed: () {},
+                      onPressed: () {
+                      },
+                      onFavoritePressed: () {
+                        final favoritesProvider =
+                            Provider.of<FavoritesProvider>(context,
+                                listen: false);
+                        favoritesProvider.addFavorite(product);
+                      },
                     ),
                   );
                 },
               ),
             ),
-
             Container(
               color: Colors.white,
               child: const Padding(
@@ -223,7 +236,7 @@ class Home extends StatelessWidget {
               color: Colors.white,
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
+                    const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
                 child: Column(
                   children: [
                     Row(
@@ -344,10 +357,9 @@ class Home extends StatelessWidget {
                 ),
               ),
             ),
-
             Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
+                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -386,6 +398,7 @@ class Home extends StatelessWidget {
                     price: '৳609',
                     buttonText: 'Add to cart',
                     onPressed: () {},
+                    onFavoritePressed: () {},
                   ),
                   ProductCard(
                     imagePath: 'assets/images/card2.png',
@@ -394,6 +407,7 @@ class Home extends StatelessWidget {
                     price: '৳609',
                     buttonText: 'Add to cart',
                     onPressed: () {},
+                    onFavoritePressed: () {},
                   ),
                   ProductCard(
                     imagePath: 'assets/images/card2.png',
@@ -402,6 +416,7 @@ class Home extends StatelessWidget {
                     price: '৳609',
                     buttonText: 'Add to cart',
                     onPressed: () {},
+                    onFavoritePressed: () {},
                   ),
                 ],
               ),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "196076923881",
+    "project_id": "ecom2-892bb",
+    "storage_bucket": "ecom2-892bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196076923881:android:02043e9f9e0e7dc857b978",
+        "android_client_info": {
+          "package_name": "com.example.ecom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFuMzS-4c1hyoAl2h17KgwBbi2BExXViU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

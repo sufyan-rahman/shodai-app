@@ -1,11 +1,32 @@
-import 'package:ecom/deals.dart';
-import 'package:flutter/foundation.dart';
+import 'package:ecom/more.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'items_page.dart';
 import 'categories.dart';
 import 'home.dart';
+import 'deals.dart';
+import 'provider/items_provider.dart';
+import 'shopping_cart.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => FavoritesProvider()),
+        // ChangeNotifierProvider(
+        //   create: (context) => CartModel(),
+        // ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,19 +34,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: MainPage(),
+      home: const MainPage(),
     );
   }
 }
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -42,10 +65,10 @@ class _MainPageState extends State<MainPage> {
   static List<Widget> _widgetOptions(VoidCallback navigateToCategories) =>
       <Widget>[
         Home(navigateToCategories: navigateToCategories),
-        CategoriesPage(),
-        DealsPage(),
-        const Text('My Items Page', style: TextStyle(fontSize: 24)),
-        const Text('More Page', style: TextStyle(fontSize: 24)),
+        const CategoriesPage(),
+        const DealsPage(),
+        const ItemsPage(),
+        const MorePage(),
       ];
 
   void _onItemTapped(int index) {
@@ -57,54 +80,57 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(0),
-          child: IconButton(
-            icon: Image.asset('assets/logo.png'),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MainPage()),
-              );
-            },
-          ),
-        ),
-        title: const TextField(
-          decoration: InputDecoration(
-            hintText: 'Search Product...',
-            suffixIcon: Icon(Icons.search),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.all(Radius.circular(70.0)),
+      appBar: _selectedIndex == 4
+          ? null
+          : AppBar(
+              leading: Padding(
+                padding: const EdgeInsets.all(0),
+                child: IconButton(
+                  icon: Image.asset('assets/logo.png'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const MainPage()),
+                    );
+                  },
+                ),
+              ),
+              title: const TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search Product...',
+                  suffixIcon: Icon(Icons.search),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.all(Radius.circular(70.0)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.all(Radius.circular(70.0)),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                ),
+              ),
+              actions: [
+                IconButton(
+                  icon: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: Image.asset('assets/icons/cart.png'),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ShoppingCartPage()));
+                  },
+                ),
+              ],
+              backgroundColor: const Color(0xFF7D7D00),
+              toolbarHeight: 70.0,
             ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.all(Radius.circular(70.0)),
-            ),
-            filled: true,
-            fillColor: Colors.white,
-            contentPadding:
-                EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: SizedBox(
-              width: 24,
-              height: 24,
-              child: Image.asset('assets/icons/cart.png'),
-            ),
-            onPressed: () {
-              if (kDebugMode) {
-                print('Button with image pressed');
-              }
-            },
-          ),
-        ],
-        backgroundColor: const Color(0xFF7D7D00),
-        toolbarHeight: 70.0,
-      ),
       body: IndexedStack(
         index: _selectedIndex,
         children: _widgetOptions(_navigateToCategories),

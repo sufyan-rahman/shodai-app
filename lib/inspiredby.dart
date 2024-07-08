@@ -63,7 +63,7 @@ class InspiredbyPage extends StatelessWidget {
                   onPressed: () {showModalBottomSheet(
                     context: context,
                     isScrollControlled: true,
-                    builder: (context) => SortFilterBottomSheet(),
+                    builder: (context) => const SortFilterBottomSheet(),
                   );},
                   child: const Text(
                     'Sort & Filter',
@@ -113,7 +113,7 @@ class InspiredbyPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card2.png',
@@ -123,7 +123,7 @@ class InspiredbyPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card1.png',
@@ -133,7 +133,7 @@ class InspiredbyPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card2.png',
@@ -143,7 +143,7 @@ class InspiredbyPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card1.png',
@@ -153,7 +153,7 @@ class InspiredbyPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card2.png',
@@ -163,7 +163,7 @@ class InspiredbyPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card1.png',
@@ -173,7 +173,7 @@ class InspiredbyPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card2.png',
@@ -183,7 +183,7 @@ class InspiredbyPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card1.png',
@@ -193,7 +193,7 @@ class InspiredbyPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card2.png',
@@ -203,7 +203,7 @@ class InspiredbyPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card1.png',
@@ -213,7 +213,7 @@ class InspiredbyPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
               ],
             ),

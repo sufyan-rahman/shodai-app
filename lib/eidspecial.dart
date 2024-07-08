@@ -1,4 +1,3 @@
-
 import 'package:ecom/widgets/sort-btn.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +61,7 @@ class EidspecialPage extends StatelessWidget {
                   onPressed: () {showModalBottomSheet(
                     context: context,
                     isScrollControlled: true,
-                    builder: (context) => SortFilterBottomSheet(),
+                    builder: (context) => const SortFilterBottomSheet(),
                   );},
                   child: const Text(
                     'Sort & Filter',
@@ -110,9 +109,8 @@ class EidspecialPage extends StatelessWidget {
                   weight: '1 Kg',
                   price: '৳609',
                   buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
+                  onPressed: () {},
+                  onFavoritePressed: (){},
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card2.png',
@@ -122,7 +120,7 @@ class EidspecialPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card1.png',
@@ -132,7 +130,7 @@ class EidspecialPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card2.png',
@@ -142,7 +140,7 @@ class EidspecialPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card1.png',
@@ -152,7 +150,7 @@ class EidspecialPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card2.png',
@@ -162,7 +160,7 @@ class EidspecialPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card1.png',
@@ -172,7 +170,7 @@ class EidspecialPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card2.png',
@@ -182,7 +180,7 @@ class EidspecialPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card1.png',
@@ -192,7 +190,7 @@ class EidspecialPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card2.png',
@@ -202,7 +200,7 @@ class EidspecialPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card1.png',
@@ -212,7 +210,7 @@ class EidspecialPage extends StatelessWidget {
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  },
+                  }, onFavoritePressed: () {  },
                 ),
               ],
             ),

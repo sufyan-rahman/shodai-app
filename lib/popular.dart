@@ -119,6 +119,7 @@ class PopularPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card2.png',
@@ -129,6 +130,7 @@ class PopularPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card3.png',
@@ -136,9 +138,8 @@ class PopularPage extends StatelessWidget {
                   weight: '1 Kg',
                   price: '৳609',
                   buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
+                  onPressed: () {},
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card4.png',
@@ -146,9 +147,8 @@ class PopularPage extends StatelessWidget {
                   weight: '1 Kg',
                   price: '৳609',
                   buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
+                  onPressed: () {},
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card5.png',
@@ -156,9 +156,8 @@ class PopularPage extends StatelessWidget {
                   weight: '1 Kg',
                   price: '৳609',
                   buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
+                  onPressed: () {},
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card6.png',
@@ -169,6 +168,7 @@ class PopularPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card7.png',
@@ -179,6 +179,7 @@ class PopularPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card8.png',
@@ -189,6 +190,7 @@ class PopularPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card9.png',
@@ -199,6 +201,7 @@ class PopularPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card10.png',
@@ -209,6 +212,7 @@ class PopularPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
                   imagePath: 'assets/images/card11.png',
@@ -219,6 +223,7 @@ class PopularPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
+                  onFavoritePressed: () {},
                 ),
               ],
             ),

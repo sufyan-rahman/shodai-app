@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
@@ -65,7 +65,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Row(
         children: [
           Expanded(
             child: ListView.builder(
@@ -73,25 +73,24 @@ class _CategoriesPageState extends State<CategoriesPage> {
               itemBuilder: (context, index) {
                 final category = categories[index];
                 return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20.0, horizontal: 2.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 20.0, horizontal: 2.0),
                   child: Container(
                     decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: Color(0xFFE8EAEC),
-                        )
-                      )
-                    ),
+                        border: Border(
+                            bottom: BorderSide(
+                      color: Color(0xFFE8EAEC),
+                    ))),
                     child: ExpansionTile(
-                      leading:
-                          Image.asset(category['imagePath'], width: 80, height: 80),
+                      leading: Image.asset(category['imagePath'],
+                          width: 80, height: 80),
                       title: Text(
                         category['title'],
-                        style:
-                            const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600),
                       ),
-                      children: (category['items'] as List<String>).map((item) {
+                      children:
+                          (category['items'] as List<String>).map((item) {
                         return ListTile(
                           title: Text(item),
                           onTap: () {
@@ -105,9 +104,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
               },
             ),
           ),
-
         ],
       ),
     );
   }
 }
+
+
+

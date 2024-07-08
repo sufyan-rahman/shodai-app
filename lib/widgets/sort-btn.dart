@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -10,7 +9,7 @@ class SortFilterBottomSheet extends StatefulWidget {
 
 class _SortFilterBottomSheetState extends State<SortFilterBottomSheet> {
   int _sortByValue = -1; // Default value for "Newest"
-  Map<String, bool> _selectedCategories = {
+  final Map<String, bool> _selectedCategories = {
     'Fruits & Vegetable (2,031)': false,
     'Baby Care (7,210)': false,
     'Household & Cleaning': false,
@@ -300,7 +299,7 @@ class _SortFilterBottomSheetState extends State<SortFilterBottomSheet> {
         ElevatedButton(
           onPressed: () => Navigator.pop(context),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFF7D7D00),
+            backgroundColor: const Color(0xFF7D7D00),
             padding:
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 100.0),
           ),
