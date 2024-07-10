@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   void _signIn() async {
     try {
       final UserCredential userCredential =
-      await _auth.signInWithEmailAndPassword(
+          await _auth.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
@@ -132,7 +132,8 @@ class _LoginPageState extends State<LoginPage> {
             ElevatedButton(
               onPressed: _signIn,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF999900), // Sign In button color
+                backgroundColor:
+                    const Color(0xFF999900), // Sign In button color
                 minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0),

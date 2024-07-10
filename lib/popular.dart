@@ -4,7 +4,74 @@ import 'package:flutter/material.dart';
 import 'package:ecom/widgets/productcard.dart';
 
 class PopularPage extends StatelessWidget {
-  const PopularPage({super.key});
+  PopularPage({super.key});
+
+  final List<Map<String, dynamic>> products = [
+    {
+      'id': '1',
+      'imagePath': 'assets/images/card1.png',
+      'title': 'Orange (South Africa)',
+      'weight': '1kg',
+      'price': 245.0,
+      'buttonText': 'Add to cart',
+    },
+    {
+      'id': '2',
+      'imagePath': 'assets/images/card2.png',
+      'title': 'Gulsha Tengra (Medium)',
+      'weight': '1kg',
+      'price': 450.0,
+      'buttonText': 'Add to cart',
+    },
+    {
+      'id': '3',
+      'imagePath': 'assets/images/card3.png',
+      'title': 'Product 2',
+      'weight': '100kg',
+      'price': 200.0,
+      'buttonText': 'Add to cart',
+    },
+    {
+      'id': '4',
+      'imagePath': 'assets/images/card4.png',
+      'title': 'Product 2',
+      'weight': '100kg',
+      'price': 200.0,
+      'buttonText': 'Add to cart',
+    },
+    {
+      'id': '5',
+      'imagePath': 'assets/images/card5.png',
+      'title': 'Nestle asd asdkjsd sdasdksd sdasd',
+      'weight': '100kg',
+      'price': 200.0,
+      'buttonText': 'Add to cart'
+    },
+    {
+      'id': '6',
+      'imagePath': 'assets/images/card6.png',
+      'title': 'Nestle asd asdkjsd sdasdksd sdasd',
+      'weight': '100kg',
+      'price': 200.0,
+      'buttonText': 'Add to cart',
+    },
+    {
+      'id': '7',
+      'imagePath': 'assets/images/card7.png',
+      'title': 'Nestle asd asdkjsd sdasdksd sdasd',
+      'weight': '100kg',
+      'price': 200.0,
+      'buttonText': 'Add to cart',
+    },
+    {
+      'id': '8',
+      'imagePath': 'assets/images/card8.png',
+      'title': 'Nestle asd asdkjsd sdasdksd sdasd',
+      'weight': '100kg',
+      'price': 200.0,
+      'buttonText': 'Add to cart',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +149,7 @@ class PopularPage extends StatelessWidget {
                   text: const TextSpan(
                     children: [
                       TextSpan(
-                        text: '12,001',
+                        text: '20000',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -104,130 +171,29 @@ class PopularPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: GridView.count(
+              child: GridView.builder(
+            itemCount: products.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 8.0,
-              mainAxisSpacing: 8.0,
-              childAspectRatio: 0.6,
-              children: [
-                ProductCard(
-                  imagePath: 'assets/images/card1.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: '৳609',
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  imagePath: 'assets/images/card2.png',
-                  title: 'Nestle asd asdkjsd sdasdksd sdasd',
-                  weight: '1 Kg',
-                  price: '৳609',
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  imagePath: 'assets/images/card3.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: '৳609',
-                  buttonText: 'Add to cart',
-                  onPressed: () {},
-                  onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  imagePath: 'assets/images/card4.png',
-                  title: 'Nestle asd asdkjsd sdasdksd sdasd',
-                  weight: '1 Kg',
-                  price: '৳609',
-                  buttonText: 'Add to cart',
-                  onPressed: () {},
-                  onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  imagePath: 'assets/images/card5.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: '৳609',
-                  buttonText: 'Add to cart',
-                  onPressed: () {},
-                  onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  imagePath: 'assets/images/card6.png',
-                  title: 'Nestle asd asdkjsd sdasdksd sdasd',
-                  weight: '1 Kg',
-                  price: '৳609',
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  imagePath: 'assets/images/card7.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: '৳609',
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  imagePath: 'assets/images/card8.png',
-                  title: 'Nestle asd asdkjsd sdasdksd sdasd',
-                  weight: '1 Kg',
-                  price: '৳609',
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  imagePath: 'assets/images/card9.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: '৳609',
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  imagePath: 'assets/images/card10.png',
-                  title: 'Nestle asd asdkjsd sdasdksd sdasd',
-                  weight: '1 Kg',
-                  price: '৳609',
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  imagePath: 'assets/images/card11.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: '৳609',
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  onFavoritePressed: () {},
-                ),
-              ],
+              childAspectRatio: 0.7,
+              crossAxisSpacing: 16.0,
+              mainAxisSpacing: 16.0,
             ),
-          )
+            itemBuilder: (context, index) {
+              final product = products[index];
+              return ProductCard(
+                imagePath: product['imagePath'],
+                title: product['title'],
+                weight: product['weight'],
+                price: '${product['price']}tk',
+                buttonText: product['buttonText'],
+                onPressed: () {},
+                onFavoritePressed: () {
+                  // Handle favorite action
+                },
+              );
+            },
+          ))
         ],
       ),
     );

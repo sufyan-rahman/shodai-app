@@ -120,7 +120,7 @@ class Home extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const PopularPage()),
+                            builder: (context) =>  PopularPage()),
                       );
                     },
                     child: const Text(

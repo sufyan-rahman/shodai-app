@@ -300,12 +300,14 @@ class _MorePageState extends State<MorePage> {
                 showModalBottomSheet(
                     context: context,
                     builder: (context) => Container(
+
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: Colors.white,
                         ),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             ListTile(
                               leading: const Icon(Icons.light_mode),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
   @override
@@ -89,8 +88,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),
-                      children:
-                          (category['items'] as List<String>).map((item) {
+                      children: (category['items'] as List<String>).map((item) {
                         return ListTile(
                           title: Text(item),
                           onTap: () {
@@ -109,6 +107,3 @@ class _CategoriesPageState extends State<CategoriesPage> {
     );
   }
 }
-
-
-

@@ -12,6 +12,20 @@ class ShoppingCartPage extends StatefulWidget {
 
 class _ShoppingCartPageState extends State<ShoppingCartPage> {
   final CartController cartController = Get.put(CartController());
+  final TextEditingController couponController = TextEditingController();
+  final RxString appliedCoupon = ''.obs;
+  final RxDouble discount = 0.0.obs;
+  final double deliveryFee = 50.0;
+
+  void applyCoupon() {
+    if (couponController.text == 'JUNE300') {
+      appliedCoupon.value = 'JUNE300';
+      discount.value = 20.0;
+    } else {
+      appliedCoupon.value = '';
+      discount.value = 0.0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +89,10 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
             ),
           );
         } else {
+          double subtotal = cartController.totalPrice;
+          double deliveryFee = 50.0;
+          double total = subtotal + deliveryFee - discount.value;
+
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -212,7 +230,6 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                                               ),
                                             ],
                                           ),
-
                                         ],
                                       ),
                                     ),
@@ -222,7 +239,6 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                               ],
                             ),
                           ),
-
                         ),
                       );
                     },
@@ -252,38 +268,78 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 16.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Enter Coupon Code',
-                      border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.check),
-                        onPressed: () {
-                          // Apply coupon logic here
-                        },
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 3,
+                        child: TextFormField(
+                          controller: couponController,
+                          decoration: const InputDecoration(
+                            hintText: 'Enter Coupon Code',
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter valid coupon code';
+                            }
+                            return null;
+                          },
+                        ),
                       ),
-                    ),
+                      const SizedBox(
+                        width: 10.0,
+                      ),
+                      Flexible(
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  elevation: 0,
+                                  minimumSize: const Size(double.infinity, 55),
+                                  backgroundColor: const Color(0xFF999900),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(5.0))),
+                              onPressed: applyCoupon,
+                              child: const Text(
+                                'Apply',
+                                style: TextStyle(color: Colors.white),
+                              )))
+                    ],
                   ),
                 ),
 
                 ///Discount and Delivery Row///
-                const Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
                   child: Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Discount:'),
-                          Text('৳0.00'),
+                          const Text(
+                            'Discount:',
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          Obx(
+                            () => Text(
+                              '- ৳${discount.value.toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                  color: Colors.red, fontSize: 17),
+                            ),
+                          ),
                         ],
                       ), // Replace with actual discount calculation
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Delivery Fee:'),
-                          Text('৳0.00'),
+                          Text(
+                            'Delivery Fee:',
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          Text(
+                            '৳50.00',
+                            style: TextStyle(fontSize: 17),
+                          ),
                         ],
                       ), // Replace with actual delivery fee calculation
                     ],
@@ -295,22 +351,27 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0, vertical: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Total:',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '৳${cartController.totalPrice.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
+                  child: Obx(() {
+                    double subtotal = cartController.totalPrice;
+                    double total = subtotal + deliveryFee - discount.value;
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Total:',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '৳$total',
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    );
+                  }),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton(
@@ -325,7 +386,13 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CheckoutPage()),
+                            builder: (context) => CheckoutPage(
+                                  subtotal: subtotal,
+                                  deliveryFee: deliveryFee,
+                                  vat: (subtotal * 0.1),
+                                  discount: discount.value,
+                                  total: total,
+                                )),
                       );
                     },
                     child: Text(
