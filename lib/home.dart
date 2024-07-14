@@ -7,47 +7,94 @@ import 'package:ecom/widgets/productcard.dart';
 import 'package:ecom/provider/items_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'product_list_data/popular_products.dart';
 
 class Home extends StatelessWidget {
-
   final VoidCallback navigateToCategories;
 
   Home({super.key, required this.navigateToCategories});
 
-  final List<Map<String, dynamic>> products = [
-    {
+  // final List<Map<String, dynamic>> popularproducts = [
+  //   {
+  //     'id': '10',
+  //     'imagePath': 'assets/images/card1.png',
+  //     'title': 'Orange (South Africa)',
+  //     'weight': '1kg',
+  //     'price': '245tk',
+  //     'buttonText': 'Add to cart',
+  //     'onPressed': () {},
+  //     'onFavoritePressed': () {}
+  //   },
+  //   {
+  //     'id': '11',
+  //     'imagePath': 'assets/images/card2.png',
+  //     'title': 'Gulsha Tengra (Medium)',
+  //     'weight': '1kg',
+  //     'price': '450tk',
+  //     'buttonText': 'Add to cart',
+  //     'onPressed': () {},
+  //     'onFavoritePressed': () {}
+  //   },
+  //   {
+  //     'id': '12',
+  //     'imagePath': 'assets/images/card3.png',
+  //     'title': 'Product 2',
+  //     'weight': '100kg',
+  //     'price': '200tk',
+  //     'buttonText': 'Add to cart',
+  //     'onPressed': () {},
+  //     'onFavoritePressed': () {}
+  //   },
+  //   {
+  //     'id': '13',
+  //     'imagePath': 'assets/images/card4.png',
+  //     'title': 'Product 2',
+  //     'weight': '100kg',
+  //     'price': '200tk',
+  //     'buttonText': 'Add to cart',
+  //     'onPressed': () {},
+  //     'onFavoritePressed': () {}
+  //   },
+  //   // Add more products here
+  // ];
 
+  final List<Map<String, dynamic>> eidproducts = [
+    {
+      'id': '20',
       'imagePath': 'assets/images/card1.png',
       'title': 'Orange (South Africa)',
       'weight': '1kg',
-      'price': '245tk',
+      'price': 245.0,
       'buttonText': 'Add to cart',
       'onPressed': () {},
       'onFavoritePressed': () {}
     },
     {
+      'id': '21',
       'imagePath': 'assets/images/card2.png',
       'title': 'Gulsha Tengra (Medium)',
       'weight': '1kg',
-      'price': '450tk',
+      'price': 450.0,
       'buttonText': 'Add to cart',
       'onPressed': () {},
       'onFavoritePressed': () {}
     },
     {
+      'id': '22',
       'imagePath': 'assets/images/card3.png',
       'title': 'Product 2',
       'weight': '100kg',
-      'price': '200tk',
+      'price': 200.0,
       'buttonText': 'Add to cart',
       'onPressed': () {},
       'onFavoritePressed': () {}
     },
     {
+      'id': '23',
       'imagePath': 'assets/images/card4.png',
       'title': 'Product 2',
       'weight': '100kg',
-      'price': '200tk',
+      'price': 200.0,
       'buttonText': 'Add to cart',
       'onPressed': () {},
       'onFavoritePressed': () {}
@@ -58,13 +105,15 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final itemsProvider = Provider.of<ItemsProvider>(context);
+    final PopularProducts = popularProducts.take(4).toList();
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2, // Set the height of the CarouselSlider
+              height: MediaQuery.of(context).size.height *
+                  0.2, // Set the height of the CarouselSlider
               child: CarouselSlider(
                 items: [
                   //1st Image of Slider
@@ -119,8 +168,7 @@ class Home extends StatelessWidget {
                       // Navigate to the ProductsPage when the button is pressed
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>  PopularPage()),
+                        MaterialPageRoute(builder: (context) => PopularPage()),
                       );
                     },
                     child: const Text(
@@ -138,18 +186,19 @@ class Home extends StatelessWidget {
               height: 300.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: products.length,
+                itemCount: PopularProducts.length,
                 itemBuilder: (context, index) {
-                  final product = products[index];
+                  final product = PopularProducts[index];
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ProductCard(
+                      id: product['id'],
                       imagePath: product['imagePath']!,
                       title: product['title']!,
                       weight: product['weight']!,
-                      price: product['price']!,
+                      price: product['price'],
                       buttonText: product['buttonText']!,
-                      onPressed: product['onPressed']!,
+                      onPressed: () {},
                       onFavoritePressed: () {
                         final favoritesProvider =
                             Provider.of<FavoritesProvider>(context,
@@ -196,19 +245,19 @@ class Home extends StatelessWidget {
               height: 300.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: products.length,
+                itemCount: eidproducts.length,
                 itemBuilder: (context, index) {
-                  final product = products[index];
+                  final product = eidproducts[index];
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ProductCard(
+                      id: product['id'],
                       imagePath: product['imagePath']!,
                       title: product['title']!,
                       weight: product['weight']!,
-                      price: product['price']!,
+                      price: product['price'],
                       buttonText: product['buttonText']!,
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                       onFavoritePressed: () {
                         final favoritesProvider =
                             Provider.of<FavoritesProvider>(context,
@@ -392,28 +441,31 @@ class Home extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 children: [
                   ProductCard(
+                    id: '31',
                     imagePath: 'assets/images/card1.png',
                     title: 'Danish Full Cream Milk Powder',
                     weight: '1 Kg',
-                    price: '৳609',
+                    price: 609,
                     buttonText: 'Add to cart',
                     onPressed: () {},
                     onFavoritePressed: () {},
                   ),
                   ProductCard(
+                    id: '32',
                     imagePath: 'assets/images/card2.png',
                     title: 'Danish Full Cream Milk Powder',
                     weight: '1 Kg',
-                    price: '৳609',
+                    price: 609,
                     buttonText: 'Add to cart',
                     onPressed: () {},
                     onFavoritePressed: () {},
                   ),
                   ProductCard(
+                    id: '33',
                     imagePath: 'assets/images/card2.png',
                     title: 'Danish Full Cream Milk Powder',
                     weight: '1 Kg',
-                    price: '৳609',
+                    price: 609,
                     buttonText: 'Add to cart',
                     onPressed: () {},
                     onFavoritePressed: () {},

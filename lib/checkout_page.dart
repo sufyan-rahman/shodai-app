@@ -30,7 +30,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
   String _selectedPaymentMethod = 'Cash on Delivery';
   String? selectedAddress;
 
-
   @override
   void initState() {
     super.initState();
@@ -301,8 +300,6 @@ class DeliveryTimePicker extends StatefulWidget {
   _DeliveryTimePickerState createState() => _DeliveryTimePickerState();
 }
 
-
-
 class _DeliveryTimePickerState extends State<DeliveryTimePicker> {
   late String _selectedDate;
   late String _selectedTime;
@@ -504,7 +501,6 @@ class _TimeButton extends StatelessWidget {
     );
   }
 }
-
 
 class OrderSummaryRow extends StatelessWidget {
   final String label;

@@ -1,8 +1,6 @@
 import 'package:ecom/manage_address.dart';
 import 'package:ecom/profile.dart';
-// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -144,38 +142,49 @@ class _MorePageState extends State<MorePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                style: TextButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 50.0),
-                                  backgroundColor: Colors.grey,
-                                ),
-                                child: const Text(
-                                  'No',
-                                  style: TextStyle(color: Colors.white),
+                              Flexible(
+                                flex: 2,
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  style: TextButton.styleFrom(
+                                    minimumSize: const Size(double.infinity, 40),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0)),
+                                    // padding: const EdgeInsets.symmetric(
+                                    //     horizontal: 50.0),
+                                    backgroundColor: Colors.grey,
+                                  ),
+                                  child: const Text(
+                                    'No',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  FirebaseAuth.instance.signOut();
-                                  _updateUser(null);
-                                  Navigator.pop(context);
-                                },
-                                style: TextButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  backgroundColor: Colors.red,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 50.0),
-                                ),
-                                child: const Text(
-                                  'Yes',
-                                  style: TextStyle(color: Colors.white),
+                              const SizedBox(width: 10.0),
+                              Flexible(
+                                flex: 2,
+                                child: TextButton(
+                                  onPressed: () {
+                                    FirebaseAuth.instance.signOut();
+                                    _updateUser(null);
+                                    Navigator.pop(context);
+                                  },
+                                  style: TextButton.styleFrom(
+                                    minimumSize: const Size(double.infinity, 40),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0)),
+                                    backgroundColor: Colors.red,
+                                    // padding: const EdgeInsets.symmetric(
+                                    //     horizontal: 50.0),
+                                  ),
+                                  child: const Text(
+                                    'Yes',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ],
@@ -300,33 +309,31 @@ class _MorePageState extends State<MorePage> {
                 showModalBottomSheet(
                     context: context,
                     builder: (context) => Container(
-
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.white,
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ListTile(
-                              leading: const Icon(Icons.light_mode),
-                              title: const Text('Light Mode'),
-                              onTap: () {
-                                Get.changeTheme(ThemeData.light());
-                              },
-                            ),
-                            ListTile(
-                              leading: const Icon(Icons.dark_mode),
-                              title: const Text('Dark Mode'),
-                              onTap: () {
-                                Get.changeTheme(ThemeData.dark());
-                              },
-                            )
-                          ],
-                        ),
-                      )
-                );
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                leading: const Icon(Icons.light_mode),
+                                title: const Text('Light Mode'),
+                                onTap: () {
+                                  Get.changeTheme(ThemeData.light());
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.dark_mode),
+                                title: const Text('Dark Mode'),
+                                onTap: () {
+                                  Get.changeTheme(ThemeData.dark());
+                                },
+                              )
+                            ],
+                          ),
+                        ));
               },
             ),
           ],

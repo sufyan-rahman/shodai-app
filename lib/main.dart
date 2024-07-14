@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'controllers/cart_controller.dart';
 import 'items_page.dart';
 import 'categories.dart';
 import 'home.dart';
@@ -20,9 +21,6 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => FavoritesProvider()),
-        // ChangeNotifierProvider(
-        //   create: (context) => CartModel(),
-        // ),
       ],
       child: const MyApp(),
     ),
@@ -39,7 +37,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-
         useMaterial3: true,
       ),
       home: const MainPage(),
@@ -78,6 +75,7 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  final CartController cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,18 +113,65 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               actions: [
-                IconButton(
-                  icon: SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: Image.asset('assets/icons/cart.png'),
+                // IconButton(
+                //   icon: SizedBox(
+                //     width: 24,
+                //     height: 24,
+                //     child: Image.asset('assets/icons/cart.png'),
+                //   ),
+                //   onPressed: () {
+                //     Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => ShoppingCartPage()));
+                //   },
+                // ),
+                Obx(
+                  () => Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      IconButton(
+                        icon: SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: Image.asset('assets/icons/cart.png'),
+                          // child: Icon(Icons.shopping_cart)
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ShoppingCartPage(),
+                            ),
+                          );
+                        },
+                      ),
+                      if (cartController.totalItems > 0)
+                        Positioned(
+                          right: 8,
+                          top: 8,
+                          child: Container(
+                            padding: const EdgeInsets.all(2.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(7.0),
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 16,
+                              minHeight: 16,
+                            ),
+                            child: Text(
+                              '${cartController.totalItems}',
+                              style: const TextStyle(
+                                // color: Colors.black,
+                                fontSize: 10,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ShoppingCartPage()));
-                  },
                 ),
               ],
               backgroundColor: const Color(0xFF7D7D00),

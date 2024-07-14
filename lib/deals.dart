@@ -5,7 +5,6 @@ import 'controllers/cart_controller.dart';
 import 'models/cart_model.dart';
 import 'widgets/socialpurchase.dart';
 
-
 class DealsPage extends StatelessWidget {
   const DealsPage({super.key});
 
@@ -106,7 +105,8 @@ Widget _buildOffersSection(CartController cartController) {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 40.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 40.0),
               ),
               onPressed: () {},
               child: const Text(
@@ -122,8 +122,8 @@ Widget _buildOffersSection(CartController cartController) {
   );
 }
 
-
-Widget _buildOffersList(List<Map<String, dynamic>> products, CartController cartController) {
+Widget _buildOffersList(
+    List<Map<String, dynamic>> products, CartController cartController) {
   return GridView.builder(
     shrinkWrap: true,
     physics: const NeverScrollableScrollPhysics(),
@@ -137,19 +137,20 @@ Widget _buildOffersList(List<Map<String, dynamic>> products, CartController cart
     itemBuilder: (context, index) {
       final product = products[index];
       return ProductCard(
+        id: product['id'],
         imagePath: product['imagePath'],
         title: product['title'],
         weight: product['weight'],
-        price: '${product['price']}tk',
+        price: product['price'],
         buttonText: product['buttonText'],
         onPressed: () {
-          cartController.addItem(CartItem(
-            id: product['id'],
-            imagePath: product['imagePath'],
-            title: product['title'],
-            weight: product['weight'],
-            price: product['price'],
-          ));
+          // cartController.addItem(CartItem(
+          //   id: product['id'],
+          //   imagePath: product['imagePath'],
+          //   title: product['title'],
+          //   weight: product['weight'],
+          //   price: product['price'],
+          // ));
         },
         onFavoritePressed: () {
           // Handle favorite action

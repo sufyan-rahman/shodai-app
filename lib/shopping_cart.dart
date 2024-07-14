@@ -1,7 +1,9 @@
 import 'package:ecom/checkout_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/cart_controller.dart';
+import 'login_page.dart';
 
 class ShoppingCartPage extends StatefulWidget {
   const ShoppingCartPage({super.key});
@@ -16,6 +18,13 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
   final RxString appliedCoupon = ''.obs;
   final RxDouble discount = 0.0.obs;
   final double deliveryFee = 50.0;
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    user = FirebaseAuth.instance.currentUser;
+  }
 
   void applyCoupon() {
     if (couponController.text == 'JUNE300') {
@@ -328,7 +337,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                             ),
                           ),
                         ],
-                      ), // Replace with actual discount calculation
+                      ),
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -341,7 +350,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                             style: TextStyle(fontSize: 17),
                           ),
                         ],
-                      ), // Replace with actual delivery fee calculation
+                      ),
                     ],
                   ),
                 ),
@@ -383,17 +392,29 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
+                      if (user != null) {
+                        // Navigate to CheckoutPage if logged in
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
                             builder: (context) => CheckoutPage(
-                                  subtotal: subtotal,
-                                  deliveryFee: deliveryFee,
-                                  vat: (subtotal * 0.1),
-                                  discount: discount.value,
-                                  total: total,
-                                )),
-                      );
+                              subtotal: subtotal,
+                              deliveryFee: deliveryFee,
+                              vat: (subtotal * 0.1),
+                              discount: discount.value,
+                              total: total,
+                            ),
+                          ),
+                        );
+                      } else {
+                        // Navigate to Login Page if not logged in
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginPage(),
+                          ),
+                        );
+                      }
                     },
                     child: Text(
                       'Checkout (${cartController.totalItems})',

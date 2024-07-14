@@ -33,6 +33,7 @@ class ItemsPage extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4.0),
                     child: ProductCard(
+                      id: product['id'],
                         imagePath: product['imagePath'],
                         title: product['title'],
                         weight: product['weight'],

@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../controllers/cart_controller.dart';
+import '../models/cart_model.dart';
 
 class ProductCard extends StatefulWidget {
+  final String id;
   final String imagePath;
   final String title;
   final String weight;
-  final String price;
+  final double price;
   final String buttonText;
   final VoidCallback onPressed;
   final VoidCallback onFavoritePressed;
 
   const ProductCard({
     super.key,
+    required this.id, // Add id
     required this.imagePath,
     required this.title,
     required this.weight,
@@ -25,6 +31,7 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
+  final CartController cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -84,12 +91,21 @@ class _ProductCardState extends State<ProductCard> {
             ),
             const SizedBox(height: 5),
             Text(
-              widget.price,
+              '${widget.price} tk',
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: widget.onPressed,
+              onPressed:(){
+                final CartItem item = CartItem(
+                  id: widget.id,
+                  imagePath: widget.imagePath,
+                  title: widget.title,
+                  weight: widget.weight,
+                  price: widget.price,
+                );
+                cartController.addItem(item);
+              },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.green,
                 backgroundColor: Colors.white,

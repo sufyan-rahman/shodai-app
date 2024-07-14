@@ -104,113 +104,134 @@ class EidspecialPage extends StatelessWidget {
               childAspectRatio: 0.6,
               children: [
                 ProductCard(
+                  id: '31',
                   imagePath: 'assets/images/card1.png',
                   title: 'Danish Full Cream Milk Powder',
                   weight: '1 Kg',
-                  price: '৳609',
+                  price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {},
-                  onFavoritePressed: (){},
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
+                  id: '32',
                   imagePath: 'assets/images/card2.png',
                   title: 'Nestle asd asdkjsd sdasdksd sdasd',
                   weight: '1 Kg',
-                  price: '৳609',
+                  price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  }, onFavoritePressed: () {  },
+                  },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
+                  id: '33',
                   imagePath: 'assets/images/card1.png',
                   title: 'Danish Full Cream Milk Powder',
                   weight: '1 Kg',
-                  price: '৳609',
+                  price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  }, onFavoritePressed: () {  },
+                  },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
+                  id: '34',
                   imagePath: 'assets/images/card2.png',
                   title: 'Nestle asd asdkjsd sdasdksd sdasd',
                   weight: '1 Kg',
-                  price: '৳609',
+                  price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  }, onFavoritePressed: () {  },
+                  },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
+                  id: '35',
                   imagePath: 'assets/images/card1.png',
                   title: 'Danish Full Cream Milk Powder',
                   weight: '1 Kg',
-                  price: '৳609',
+                  price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  }, onFavoritePressed: () {  },
+                  },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
+                  id: '36',
                   imagePath: 'assets/images/card2.png',
                   title: 'Nestle asd asdkjsd sdasdksd sdasd',
                   weight: '1 Kg',
-                  price: '৳609',
+                  price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  }, onFavoritePressed: () {  },
+                  },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
+                  id: '37',
                   imagePath: 'assets/images/card1.png',
                   title: 'Danish Full Cream Milk Powder',
                   weight: '1 Kg',
-                  price: '৳609',
+                  price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  }, onFavoritePressed: () {  },
+                  },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
+                  id: '38',
                   imagePath: 'assets/images/card2.png',
                   title: 'Nestle asd asdkjsd sdasdksd sdasd',
                   weight: '1 Kg',
-                  price: '৳609',
+                  price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  }, onFavoritePressed: () {  },
+                  },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
+                  id: '39',
                   imagePath: 'assets/images/card1.png',
                   title: 'Danish Full Cream Milk Powder',
                   weight: '1 Kg',
-                  price: '৳609',
+                  price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  }, onFavoritePressed: () {  },
+                  },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
+                  id: '40',
                   imagePath: 'assets/images/card2.png',
                   title: 'Nestle asd asdkjsd sdasdksd sdasd',
                   weight: '1 Kg',
-                  price: '৳609',
+                  price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  }, onFavoritePressed: () {  },
+                  },
+                  onFavoritePressed: () {},
                 ),
                 ProductCard(
+                  id: '41',
                   imagePath: 'assets/images/card1.png',
                   title: 'Danish Full Cream Milk Powder',
                   weight: '1 Kg',
-                  price: '৳609',
+                  price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {
                     // Add to cart action
-                  }, onFavoritePressed: () {  },
+                  },
+                  onFavoritePressed: () {},
                 ),
               ],
             ),
