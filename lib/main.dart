@@ -2,13 +2,13 @@ import 'package:ecom/more.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'controllers/cart_controller.dart';
 import 'items_page.dart';
 import 'categories.dart';
 import 'home.dart';
 import 'deals.dart';
-import 'provider/items_provider.dart';
+import 'product_firestore.dart';
+import 'product_list_data/popular_products.dart';
 import 'shopping_cart.dart';
 import 'firebase_options.dart';
 
@@ -17,13 +17,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await addOrUpdateProductsInFirestore('popularProducts', popularProducts);
+  // await addOrUpdateProductsInFirestore('eidProducts', eidcards);
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => FavoritesProvider()),
-      ],
-      child: const MyApp(),
-    ),
+    const MyApp(),
   );
 }
 
@@ -65,7 +62,7 @@ class _MainPageState extends State<MainPage> {
         Home(navigateToCategories: navigateToCategories),
         const CategoriesPage(),
         const DealsPage(),
-        const ItemsPage(),
+         ItemsPage(),
         const MorePage(),
       ];
 
@@ -94,22 +91,24 @@ class _MainPageState extends State<MainPage> {
                   },
                 ),
               ),
-              title: const TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search Product...',
-                  suffixIcon: Icon(Icons.search),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.all(Radius.circular(70.0)),
+              title: GestureDetector(
+                child: const TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search Product...',
+                    suffixIcon: Icon(Icons.search),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(70.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(70.0)),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.all(Radius.circular(70.0)),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                 ),
               ),
               actions: [

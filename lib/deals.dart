@@ -2,7 +2,7 @@ import 'package:ecom/widgets/productcard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/cart_controller.dart';
-import 'models/cart_model.dart';
+// import 'models/cart_model.dart';
 import 'widgets/socialpurchase.dart';
 
 class DealsPage extends StatelessWidget {
@@ -151,9 +151,6 @@ Widget _buildOffersList(
           //   weight: product['weight'],
           //   price: product['price'],
           // ));
-        },
-        onFavoritePressed: () {
-          // Handle favorite action
         },
       );
     },

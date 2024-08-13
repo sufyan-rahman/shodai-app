@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecom/confirm_order.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'manage_address.dart';
@@ -37,6 +38,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     DateTime today = DateTime.now();
     DateTime threeDaysFromNow = today.add(const Duration(days: 3));
     selectedDate = DateFormat('EEE, MMM d').format(threeDaysFromNow);
+    initializeOrderNumberDocument();
   }
 
   void _selectPaymentMethod(String? method) {
@@ -73,6 +75,130 @@ class _CheckoutPageState extends State<CheckoutPage> {
     return [];
   }
 
+  Future<Map<String, String>> fetchUserDetails() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      if (userSnapshot.exists) {
+        Map<String, dynamic> userData =
+            userSnapshot.data() as Map<String, dynamic>;
+        return {
+          'name': userData['name'] ?? '',
+          'phone': userData['phone'] ?? '',
+          'address': userData['address'] ??
+              '', // Make sure to fetch the address as well
+        };
+      }
+    }
+
+    return {
+      'name': '',
+      'phone': '',
+      'address': '',
+    };
+  }
+
+  Future<void> _navigateToOrderConfirmedPage() async {
+    if (selectedAddress == null) {
+      _showAddressSelectionPrompt();
+      return;
+    }
+
+    // Fetch user details from Firestore
+    Map<String, String> userDetails = await fetchUserDetails();
+
+    // Generate a unique order number
+    String orderNumber = await _generateOrderNumber();
+
+    // Order details
+    Map<String, dynamic> orderDetails = {
+      'paymentMethod': _selectedPaymentMethod,
+      'orderPlacedDate': DateTime.now(),
+      'orderNumber': orderNumber,
+      'preferredDeliveryTime':
+      '$selectedTime, $selectedDate', // This should come from user input
+      'deliveryAddress': selectedAddress!,
+      'userName': userDetails['name']!,
+      'userPhoneNumber': userDetails['phone']!,
+      'subtotal': widget.subtotal, // Replace with actual subtotal
+      'deliveryFee': widget.deliveryFee, // Replace with actual delivery fee
+      'vat': widget.vat, // Replace with actual VAT
+      'discount': widget.discount, // Replace with actual discount
+      'total': widget.total, // Replace with actual total
+    };
+
+    // Save order to Firestore
+    await _saveOrderToFirestore(orderDetails);
+
+    // Navigate to OrderConfirmedPage
+    DateTime now = DateTime.now();
+    DateTime orderPlacedDate = DateTime(
+        now.year, now.month, now.day, now.hour, now.minute, now.second);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => OrderConfirmedPage(
+          paymentMethod: _selectedPaymentMethod,
+          orderPlacedDate: orderPlacedDate,
+          orderNumber: orderNumber,
+          preferredDeliveryTime: '$selectedDate, $selectedTime',
+          deliveryAddress: selectedAddress!,
+          userName: userDetails['name']!,
+          userPhoneNumber: userDetails['phone']!,
+          subtotal: widget.subtotal,
+          deliveryFee: widget.deliveryFee,
+          vat: widget.vat,
+          discount: widget.discount,
+          total: widget.total,
+        ),
+      ),
+    );
+  }
+
+  void _showAddressSelectionPrompt() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Address Not Selected'),
+          content: const Text('Please select a delivery address to proceed.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _showAddressSelectionDialog();
+              },
+              child: const Text('Select Address'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> initializeOrderNumberDocument() async {
+    DocumentReference orderNumberRef = FirebaseFirestore.instance
+        .collection('orderNumbers')
+        .doc('lastOrderNumber');
+
+    DocumentSnapshot snapshot = await orderNumberRef.get();
+    if (!snapshot.exists) {
+      await orderNumberRef.set({'value': 1000});
+    }
+  }
+
   Future<void> _showAddressSelectionDialog() async {
     final addresses = await _fetchAddresses();
     if (addresses.isEmpty) {
@@ -101,7 +227,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       '${address['area']}, ${address['city']}, ${address['zipCode']}'),
                   onTap: () {
                     setState(() {
-                      selectedAddress = address['address'];
+                      selectedAddress =
+                          '${address['address']}, ${address['area']}, ${address['city']}, ${address['zipCode']}';
                     });
                     Navigator.pop(context);
                   },
@@ -130,6 +257,39 @@ class _CheckoutPageState extends State<CheckoutPage> {
         );
       },
     );
+  }
+
+  Future<String> _generateOrderNumber() async {
+    DocumentReference orderNumberRef = FirebaseFirestore.instance
+        .collection('orderNumbers')
+        .doc('lastOrderNumber');
+
+    return FirebaseFirestore.instance.runTransaction((transaction) async {
+      DocumentSnapshot snapshot = await transaction.get(orderNumberRef);
+
+      if (!snapshot.exists) {
+        // Handle the case where the document does not exist
+        await transaction.set(orderNumberRef, {'value': 1000});
+        snapshot = await transaction.get(orderNumberRef);
+      }
+
+      int newOrderNumber = snapshot.get('value') + 1;
+      transaction.update(orderNumberRef, {'value': newOrderNumber});
+
+      return newOrderNumber.toString().padLeft(3, '0');
+    });
+  }
+
+  Future<void> _saveOrderToFirestore(Map<String, dynamic> orderDetails) async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .collection('orders')
+          .add(orderDetails);
+    }
   }
 
   @override
@@ -262,9 +422,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(
-              onPressed: () {
-                // Add your order confirmation functionality here
-              },
+              onPressed: _navigateToOrderConfirmedPage,
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF999900),
                 minimumSize: const Size(double.infinity, 50),

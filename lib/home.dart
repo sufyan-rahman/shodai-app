@@ -1,12 +1,10 @@
 import 'package:ecom/eidspecial.dart';
 import 'package:ecom/inspiredby.dart';
+import 'package:ecom/product_description.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'popular.dart';
 import 'package:ecom/widgets/productcard.dart';
-import 'package:ecom/provider/items_provider.dart';
-import 'package:provider/provider.dart';
-
 import 'product_list_data/popular_products.dart';
 
 class Home extends StatelessWidget {
@@ -191,20 +189,37 @@ class Home extends StatelessWidget {
                   final product = PopularProducts[index];
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ProductCard(
-                      id: product['id'],
-                      imagePath: product['imagePath']!,
-                      title: product['title']!,
-                      weight: product['weight']!,
-                      price: product['price'],
-                      buttonText: product['buttonText']!,
-                      onPressed: () {},
-                      onFavoritePressed: () {
-                        final favoritesProvider =
-                            Provider.of<FavoritesProvider>(context,
-                                listen: false);
-                        favoritesProvider.addFavorite(product);
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductDescription(
+                              id: product['id'],
+                              imagePath: product['imagePath'],
+                              title: product['title'],
+                              weight: product['weight'],
+                              price: product['price'],
+                              description: product['description'],
+                            ),
+                          ),
+                        );
                       },
+                      child: ProductCard(
+                        id: product['id'],
+                        imagePath: product['imagePath']!,
+                        title: product['title']!,
+                        weight: product['weight']!,
+                        price: product['price'],
+                        buttonText: product['buttonText']!,
+                        onPressed: () {},
+                        // onFavoritePressed: () {
+                        //   final favoritesProvider =
+                        //       Provider.of<FavoritesProvider>(context,
+                        //           listen: false);
+                        //   favoritesProvider.addFavorite(product);
+                        // },
+                      ),
                     ),
                   );
                 },
@@ -258,12 +273,12 @@ class Home extends StatelessWidget {
                       price: product['price'],
                       buttonText: product['buttonText']!,
                       onPressed: () {},
-                      onFavoritePressed: () {
-                        final favoritesProvider =
-                            Provider.of<FavoritesProvider>(context,
-                                listen: false);
-                        favoritesProvider.addFavorite(product);
-                      },
+                      // onFavoritePressed: () {
+                      //   final favoritesProvider =
+                      //       Provider.of<FavoritesProvider>(context,
+                      //           listen: false);
+                      //   favoritesProvider.addFavorite(product);
+                      // },
                     ),
                   );
                 },
@@ -448,7 +463,7 @@ class Home extends StatelessWidget {
                     price: 609,
                     buttonText: 'Add to cart',
                     onPressed: () {},
-                    onFavoritePressed: () {},
+                    // onFavoritePressed: () {},
                   ),
                   ProductCard(
                     id: '32',
@@ -458,7 +473,7 @@ class Home extends StatelessWidget {
                     price: 609,
                     buttonText: 'Add to cart',
                     onPressed: () {},
-                    onFavoritePressed: () {},
+                    // onFavoritePressed: () {},
                   ),
                   ProductCard(
                     id: '33',
@@ -468,7 +483,7 @@ class Home extends StatelessWidget {
                     price: 609,
                     buttonText: 'Add to cart',
                     onPressed: () {},
-                    onFavoritePressed: () {},
+                    // onFavoritePressed: () {},
                   ),
                 ],
               ),

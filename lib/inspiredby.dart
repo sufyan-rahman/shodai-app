@@ -114,7 +114,7 @@ class InspiredbyPage extends StatelessWidget {
                   price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {},
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '32',
@@ -126,7 +126,7 @@ class InspiredbyPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '33',
@@ -138,7 +138,7 @@ class InspiredbyPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '34',
@@ -150,7 +150,7 @@ class InspiredbyPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '35',
@@ -162,7 +162,7 @@ class InspiredbyPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '36',
@@ -174,7 +174,7 @@ class InspiredbyPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '37',
@@ -186,7 +186,7 @@ class InspiredbyPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '38',
@@ -198,7 +198,7 @@ class InspiredbyPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '39',
@@ -210,7 +210,7 @@ class InspiredbyPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '40',
@@ -222,7 +222,7 @@ class InspiredbyPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '41',
@@ -234,7 +234,7 @@ class InspiredbyPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
               ],
             ),

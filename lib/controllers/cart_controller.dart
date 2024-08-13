@@ -29,3 +29,4 @@ class CartController extends GetxController {
   int get totalItems => cartItems.fold(0, (sum, item) => sum + item.quantity);
   double get totalPrice => cartItems.fold(0.0, (sum, item) => sum + (item.price * item.quantity));
 }
+

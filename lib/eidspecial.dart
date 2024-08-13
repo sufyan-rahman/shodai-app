@@ -111,7 +111,7 @@ class EidspecialPage extends StatelessWidget {
                   price: 609,
                   buttonText: 'Add to cart',
                   onPressed: () {},
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '32',
@@ -123,7 +123,7 @@ class EidspecialPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '33',
@@ -135,7 +135,7 @@ class EidspecialPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '34',
@@ -147,7 +147,7 @@ class EidspecialPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '35',
@@ -159,7 +159,7 @@ class EidspecialPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '36',
@@ -171,7 +171,7 @@ class EidspecialPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '37',
@@ -183,7 +183,7 @@ class EidspecialPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '38',
@@ -195,7 +195,7 @@ class EidspecialPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '39',
@@ -207,7 +207,7 @@ class EidspecialPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '40',
@@ -219,7 +219,7 @@ class EidspecialPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
                 ProductCard(
                   id: '41',
@@ -231,7 +231,7 @@ class EidspecialPage extends StatelessWidget {
                   onPressed: () {
                     // Add to cart action
                   },
-                  onFavoritePressed: () {},
+                  // onFavoritePressed: () {},
                 ),
               ],
             ),

@@ -1,5 +1,5 @@
+import 'package:ecom/product_description.dart';
 import 'package:ecom/widgets/sort-btn.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom/widgets/productcard.dart';
 import 'package:get/get.dart';
@@ -37,7 +37,7 @@ class PopularPage extends StatelessWidget {
             //   },
             // ),
             Obx(
-                  () => Stack(
+              () => Stack(
                 alignment: Alignment.center,
                 children: [
                   IconButton(
@@ -166,17 +166,34 @@ class PopularPage extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               final product = popularProducts[index];
-              return ProductCard(
-                id: product['id'],
-                imagePath: product['imagePath'],
-                title: product['title'],
-                weight: product['weight'],
-                price: product['price'],
-                buttonText: product['buttonText'],
-                onPressed: () {},
-                onFavoritePressed: () {
-                  // Handle favorite action
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductDescription(
+                        id: product['id'],
+                        imagePath: product['imagePath'],
+                        title: product['title'],
+                        weight: product['weight'],
+                        price: product['price'],
+                        description: product['description'],
+                      ),
+                    ),
+                  );
                 },
+                child: ProductCard(
+                  id: product['id'],
+                  imagePath: product['imagePath'],
+                  title: product['title'],
+                  weight: product['weight'],
+                  price: product['price'],
+                  buttonText: product['buttonText'],
+                  onPressed: () {},
+                  // onFavoritePressed: () {
+                  //   // Handle favorite action
+                  // },
+                ),
               );
             },
           ))

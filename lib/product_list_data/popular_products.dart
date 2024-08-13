@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 final List<Map<String, dynamic>> popularProducts = [
   {
     'id': '10',
@@ -6,6 +7,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'weight': '2kg',
     'price': 245.0,
     'buttonText': 'Add to cart',
+    'description': 'Shodai is location based food and grocery service. You will find everything healthy and hygienic from our wide range of products category. You are able to order your desired products which will be delivered right to your doorstep. Sometimes it is not possible for you to shop necessary things just for lack of time. Shodai can take responsibility to complete your shopping task so that you can spend your time with your loved ones.'
   },
   {
     'id': '12',
@@ -14,6 +16,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'weight': '1kg',
     'price': 450.0,
     'buttonText': 'Add to cart',
+    'description': 'Shodai is location based food and grocery service. You will find everything healthy and hygienic from our wide range of products category. You are able to order your desired products which will be delivered right to your doorstep. Sometimes it is not possible for you to shop necessary things just for lack of time. Shodai can take responsibility to complete your shopping task so that you can spend your time with your loved ones.'
   },
   {
     'id': '13',
@@ -22,6 +25,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'weight': '100kg',
     'price': 200.0,
     'buttonText': 'Add to cart',
+    'description': 'Shodai is location based food and grocery service. You will find everything healthy and hygienic from our wide range of products category. You are able to order your desired products which will be delivered right to your doorstep. Sometimes it is not possible for you to shop necessary things just for lack of time. Shodai can take responsibility to complete your shopping task so that you can spend your time with your loved ones.'
   },
   {
     'id': '14',
@@ -30,6 +34,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'weight': '100kg',
     'price': 200.0,
     'buttonText': 'Add to cart',
+    'description': 'dscdscds'
   },
   {
     'id': '15',
@@ -37,7 +42,8 @@ final List<Map<String, dynamic>> popularProducts = [
     'title': 'Nestle asd asdkjsd sdasdksd sdasd',
     'weight': '100kg',
     'price': 200.0,
-    'buttonText': 'Add to cart'
+    'buttonText': 'Add to cart',
+    'description': 'dcjsncjnsdcj'
   },
   {
     'id': '16',
@@ -46,6 +52,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'weight': '100kg',
     'price': 200.0,
     'buttonText': 'Add to cart',
+    'description': 'dcjsncjnsdcj'
   },
   {
     'id': '17',
@@ -54,6 +61,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'weight': '100kg',
     'price': 200.0,
     'buttonText': 'Add to cart',
+    'description': 'dcjsncjnsdcj'
   },
   {
     'id': '18',
@@ -62,5 +70,20 @@ final List<Map<String, dynamic>> popularProducts = [
     'weight': '100kg',
     'price': 200.0,
     'buttonText': 'Add to cart',
+    'description': 'dcjsncjnsdcj'
   },
 ];
+
+// // Function to add products to Firestore
+// Future<void> addProductsToFirestore() async {
+//   CollectionReference productsCollection =
+//   FirebaseFirestore.instance.collection('popularProducts');
+//
+//   for (var product in popularProducts) {
+//     await productsCollection.add(product).then((value) {
+//       print("Product Added: ${value.id}");
+//     }).catchError((error) {
+//       print("Failed to add product: $error");
+//     });
+//   }
+// }
