@@ -23,19 +23,6 @@ class PopularPage extends StatelessWidget {
               icon: const Icon(Icons.search),
               onPressed: () {},
             ),
-            // IconButton(
-            //   icon: SizedBox(
-            //     width: 30,
-            //     height: 30,
-            //     child: Image.asset('assets/icons/cart2.png'),
-            //   ),
-            //   onPressed: () {
-            //     // Define what happens when the button is pressed
-            //     if (kDebugMode) {
-            //       // print('Button with image pressed');
-            //     }
-            //   },
-            // ),
             Obx(
               () => Stack(
                 alignment: Alignment.center,
@@ -113,11 +100,6 @@ class PopularPage extends StatelessWidget {
                   onPressed: () {
                     showModalBottomSheet(
                       context: context,
-                      // shape: RoundedRectangleBorder(
-                      //   borderRadius: BorderRadius.vertical(
-                      //     top: Radius.circular(20),
-                      //   ),
-                      // ),
                       isScrollControlled: true,
                       builder: (context) => const SortFilterBottomSheet(),
                     );

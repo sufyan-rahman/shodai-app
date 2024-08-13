@@ -1,4 +1,5 @@
 import 'package:ecom/more.dart';
+import 'package:ecom/search.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await addOrUpdateProductsInFirestore('popularProducts', popularProducts);
+  // await addOrUpdateProductsInFirestore('popularProducts', popularProducts);
   // await addOrUpdateProductsInFirestore('eidProducts', eidcards);
   runApp(
     const MyApp(),
@@ -91,27 +92,38 @@ class _MainPageState extends State<MainPage> {
                   },
                 ),
               ),
-              title: GestureDetector(
-                child: const TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search Product...',
-                    suffixIcon: Icon(Icons.search),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(70.0)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(70.0)),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+              title:  ElevatedButton(
+                onPressed: (){ Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SearchPage()),
+                );},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(70.0),
                   ),
+                  padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                  side: const BorderSide(color: Colors.white),
+                ),
+                child: Row(
+                  children: [
+                    const Expanded(
+                      child: Text(
+                        'Search Product...',
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      Icons.search,
+                      color: Colors.grey.shade600,
+                    ),
+                  ],
                 ),
               ),
-              actions: [
+
+        actions: [
                 // IconButton(
                 //   icon: SizedBox(
                 //     width: 24,
