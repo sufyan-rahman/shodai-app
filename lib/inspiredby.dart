@@ -1,11 +1,15 @@
-import 'package:flutter/foundation.dart';
+import 'package:ecom/product_list_data/inspiredby_products.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom/widgets/productcard.dart';
+import 'package:get/get.dart';
+import 'controllers/cart_controller.dart';
+import 'product_description.dart';
+import 'shopping_cart.dart';
 import 'widgets/sort-btn.dart';
 
 class InspiredbyPage extends StatelessWidget {
-  const InspiredbyPage({super.key});
-
+  InspiredbyPage({super.key});
+  final CartController cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,18 +23,52 @@ class InspiredbyPage extends StatelessWidget {
               icon: const Icon(Icons.search),
               onPressed: () {},
             ),
-            IconButton(
-              icon: SizedBox(
-                width: 30,
-                height: 30,
-                child: Image.asset('assets/icons/cart2.png'),
+            Obx(
+              () => Stack(
+                alignment: Alignment.center,
+                children: [
+                  IconButton(
+                    icon: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: Image.asset('assets/icons/cart2.png'),
+                      // child: Icon(Icons.shopping_cart)
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ShoppingCartPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  if (cartController.totalItems > 0)
+                    Positioned(
+                      right: 8,
+                      top: 8,
+                      child: Container(
+                        padding: const EdgeInsets.all(2.0),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF7D7D00),
+                          borderRadius: BorderRadius.circular(7.0),
+                        ),
+                        constraints: const BoxConstraints(
+                          minWidth: 16,
+                          minHeight: 16,
+                        ),
+                        child: Text(
+                          '${cartController.totalItems}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                ],
               ),
-              onPressed: () {
-                // Define what happens when the button is pressed
-                if (kDebugMode) {
-                  // print('Button with image pressed');
-                }
-              },
             ),
           ],
           toolbarHeight: 70.0,
@@ -75,17 +113,17 @@ class InspiredbyPage extends StatelessWidget {
                   ),
                 ),
                 RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     children: [
                       TextSpan(
-                        text: '402',
-                        style: TextStyle(
+                        text: '${inspiredProducts.length}',
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                           fontSize: 16.0,
                         ),
                       ),
-                      TextSpan(
+                      const TextSpan(
                         text: ' items',
                         style: TextStyle(
                           fontWeight: FontWeight.normal,
@@ -100,145 +138,48 @@ class InspiredbyPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 2,
-              crossAxisSpacing: 8.0,
-              mainAxisSpacing: 8.0,
-              childAspectRatio: 0.6,
-              children: [
-                ProductCard(
-                  id: '31',
-                  imagePath: 'assets/images/card1.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: 609,
-                  buttonText: 'Add to cart',
-                  onPressed: () {},
-                  // onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  id: '32',
-                  imagePath: 'assets/images/card2.png',
-                  title: 'Nestle asd asdkjsd sdasdksd sdasd',
-                  weight: '1 Kg',
-                  price: 609,
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
+            child: GridView.builder(
+              itemCount: inspiredProducts.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.7,
+                crossAxisSpacing: 16.0,
+                mainAxisSpacing: 16.0,
+              ),
+              itemBuilder: (context, index) {
+                final product = inspiredProducts[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductDescription(
+                          id: product['id'],
+                          imagePath: product['imagePath'],
+                          title: product['title'],
+                          weight: product['weight'],
+                          price: product['price'],
+                          description: product['description'],
+                        ),
+                      ),
+                    );
                   },
-                  // onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  id: '33',
-                  imagePath: 'assets/images/card1.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: 609,
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  // onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  id: '34',
-                  imagePath: 'assets/images/card2.png',
-                  title: 'Nestle asd asdkjsd sdasdksd sdasd',
-                  weight: '1 Kg',
-                  price: 609,
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  // onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  id: '35',
-                  imagePath: 'assets/images/card1.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: 609,
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  // onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  id: '36',
-                  imagePath: 'assets/images/card2.png',
-                  title: 'Nestle asd asdkjsd sdasdksd sdasd',
-                  weight: '1 Kg',
-                  price: 609,
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  // onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  id: '37',
-                  imagePath: 'assets/images/card1.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: 609,
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  // onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  id: '38',
-                  imagePath: 'assets/images/card2.png',
-                  title: 'Nestle asd asdkjsd sdasdksd sdasd',
-                  weight: '1 Kg',
-                  price: 609,
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  // onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  id: '39',
-                  imagePath: 'assets/images/card1.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: 609,
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  // onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  id: '40',
-                  imagePath: 'assets/images/card2.png',
-                  title: 'Nestle asd asdkjsd sdasdksd sdasd',
-                  weight: '1 Kg',
-                  price: 609,
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  // onFavoritePressed: () {},
-                ),
-                ProductCard(
-                  id: '41',
-                  imagePath: 'assets/images/card1.png',
-                  title: 'Danish Full Cream Milk Powder',
-                  weight: '1 Kg',
-                  price: 609,
-                  buttonText: 'Add to cart',
-                  onPressed: () {
-                    // Add to cart action
-                  },
-                  // onFavoritePressed: () {},
-                ),
-              ],
+                  child: ProductCard(
+                    id: product['id'],
+                    imagePath: product['imagePath'],
+                    title: product['title'],
+                    weight: product['weight'],
+                    price: product['price'],
+                    buttonText: product['buttonText'],
+                    onPressed: () {},
+                    // onFavoritePressed: () {
+                    //   // Handle favorite action
+                    // },
+                  ),
+                );
+              },
             ),
-          )
+          ),
         ],
       ),
     );

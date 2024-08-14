@@ -411,7 +411,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LoginPage(),
+                            builder: (context) => const LoginPage(),
                           ),
                         );
                       }

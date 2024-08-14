@@ -1,10 +1,12 @@
 import 'package:ecom/eidspecial.dart';
 import 'package:ecom/inspiredby.dart';
 import 'package:ecom/product_description.dart';
+import 'package:ecom/product_list_data/inspiredby_products.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'popular.dart';
 import 'package:ecom/widgets/productcard.dart';
+import 'product_list_data/eidspecial_products.dart';
 import 'product_list_data/popular_products.dart';
 
 class Home extends StatelessWidget {
@@ -56,54 +58,56 @@ class Home extends StatelessWidget {
   //   // Add more products here
   // ];
 
-  final List<Map<String, dynamic>> eidproducts = [
-    {
-      'id': '20',
-      'imagePath': 'assets/images/card1.png',
-      'title': 'Orange (South Africa)',
-      'weight': '1kg',
-      'price': 245.0,
-      'buttonText': 'Add to cart',
-      'onPressed': () {},
-      'onFavoritePressed': () {}
-    },
-    {
-      'id': '21',
-      'imagePath': 'assets/images/card2.png',
-      'title': 'Gulsha Tengra (Medium)',
-      'weight': '1kg',
-      'price': 450.0,
-      'buttonText': 'Add to cart',
-      'onPressed': () {},
-      'onFavoritePressed': () {}
-    },
-    {
-      'id': '22',
-      'imagePath': 'assets/images/card3.png',
-      'title': 'Product 2',
-      'weight': '100kg',
-      'price': 200.0,
-      'buttonText': 'Add to cart',
-      'onPressed': () {},
-      'onFavoritePressed': () {}
-    },
-    {
-      'id': '23',
-      'imagePath': 'assets/images/card4.png',
-      'title': 'Product 2',
-      'weight': '100kg',
-      'price': 200.0,
-      'buttonText': 'Add to cart',
-      'onPressed': () {},
-      'onFavoritePressed': () {}
-    },
-    // Add more products here
-  ];
+  // final List<Map<String, dynamic>> eidproducts = [
+  //   {
+  //     'id': '20',
+  //     'imagePath': 'assets/images/card1.png',
+  //     'title': 'Orange (South Africa)',
+  //     'weight': '1kg',
+  //     'price': 245.0,
+  //     'buttonText': 'Add to cart',
+  //     'onPressed': () {},
+  //     'onFavoritePressed': () {}
+  //   },
+  //   {
+  //     'id': '21',
+  //     'imagePath': 'assets/images/card2.png',
+  //     'title': 'Gulsha Tengra (Medium)',
+  //     'weight': '1kg',
+  //     'price': 450.0,
+  //     'buttonText': 'Add to cart',
+  //     'onPressed': () {},
+  //     'onFavoritePressed': () {}
+  //   },
+  //   {
+  //     'id': '22',
+  //     'imagePath': 'assets/images/card3.png',
+  //     'title': 'Product 2',
+  //     'weight': '100kg',
+  //     'price': 200.0,
+  //     'buttonText': 'Add to cart',
+  //     'onPressed': () {},
+  //     'onFavoritePressed': () {}
+  //   },
+  //   {
+  //     'id': '23',
+  //     'imagePath': 'assets/images/card4.png',
+  //     'title': 'Product 2',
+  //     'weight': '100kg',
+  //     'price': 200.0,
+  //     'buttonText': 'Add to cart',
+  //     'onPressed': () {},
+  //     'onFavoritePressed': () {}
+  //   },
+  //   // Add more products here
+  // ];
 
   @override
   Widget build(BuildContext context) {
     // final itemsProvider = Provider.of<ItemsProvider>(context);
     final PopularProducts = popularProducts.take(4).toList();
+    final EidProducts = eidproducts.take(4).toList();
+    final InspiredbyProducts = inspiredProducts.take(4).toList();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -242,7 +246,7 @@ class Home extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const EidspecialPage()),
+                            builder: (context) => EidspecialPage()),
                       );
                     },
                     child: const Text(
@@ -260,9 +264,9 @@ class Home extends StatelessWidget {
               height: 300.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: eidproducts.length,
+                itemCount: EidProducts.length,
                 itemBuilder: (context, index) {
-                  final product = eidproducts[index];
+                  final product = EidProducts[index];
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ProductCard(
@@ -273,12 +277,6 @@ class Home extends StatelessWidget {
                       price: product['price'],
                       buttonText: product['buttonText']!,
                       onPressed: () {},
-                      // onFavoritePressed: () {
-                      //   final favoritesProvider =
-                      //       Provider.of<FavoritesProvider>(context,
-                      //           listen: false);
-                      //   favoritesProvider.addFavorite(product);
-                      // },
                     ),
                   );
                 },
@@ -437,7 +435,7 @@ class Home extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const InspiredbyPage()),
+                            builder: (context) => InspiredbyPage()),
                       );
                     },
                     child: const Text(
@@ -451,41 +449,42 @@ class Home extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 325.0, // Set the height of the horizontal ListView
-              child: ListView(
+              height: 300.0,
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  ProductCard(
-                    id: '31',
-                    imagePath: 'assets/images/card1.png',
-                    title: 'Danish Full Cream Milk Powder',
-                    weight: '1 Kg',
-                    price: 609,
-                    buttonText: 'Add to cart',
-                    onPressed: () {},
-                    // onFavoritePressed: () {},
-                  ),
-                  ProductCard(
-                    id: '32',
-                    imagePath: 'assets/images/card2.png',
-                    title: 'Danish Full Cream Milk Powder',
-                    weight: '1 Kg',
-                    price: 609,
-                    buttonText: 'Add to cart',
-                    onPressed: () {},
-                    // onFavoritePressed: () {},
-                  ),
-                  ProductCard(
-                    id: '33',
-                    imagePath: 'assets/images/card2.png',
-                    title: 'Danish Full Cream Milk Powder',
-                    weight: '1 Kg',
-                    price: 609,
-                    buttonText: 'Add to cart',
-                    onPressed: () {},
-                    // onFavoritePressed: () {},
-                  ),
-                ],
+                itemCount: InspiredbyProducts.length,
+                itemBuilder: (context, index) {
+                  final product = InspiredbyProducts[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductDescription(
+                              id: product['id'],
+                              imagePath: product['imagePath'],
+                              title: product['title'],
+                              weight: product['weight'],
+                              price: product['price'],
+                              description: product['description'],
+                            ),
+                          ),
+                        );
+                      },
+                      child: ProductCard(
+                        id: product['id'],
+                        imagePath: product['imagePath']!,
+                        title: product['title']!,
+                        weight: product['weight']!,
+                        price: product['price'],
+                        buttonText: product['buttonText']!,
+                        onPressed: () {},
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],

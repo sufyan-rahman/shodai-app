@@ -8,8 +8,6 @@ import 'items_page.dart';
 import 'categories.dart';
 import 'home.dart';
 import 'deals.dart';
-import 'product_firestore.dart';
-import 'product_list_data/popular_products.dart';
 import 'shopping_cart.dart';
 import 'firebase_options.dart';
 
@@ -46,7 +44,7 @@ class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
   @override
-  _MainPageState createState() => _MainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
@@ -63,7 +61,7 @@ class _MainPageState extends State<MainPage> {
         Home(navigateToCategories: navigateToCategories),
         const CategoriesPage(),
         const DealsPage(),
-         ItemsPage(),
+        ItemsPage(),
         const MorePage(),
       ];
 
@@ -92,17 +90,20 @@ class _MainPageState extends State<MainPage> {
                   },
                 ),
               ),
-              title:  ElevatedButton(
-                onPressed: (){ Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SearchPage()),
-                );},
+              title: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SearchPage()),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(70.0),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 0.0, horizontal: 10.0),
                   side: const BorderSide(color: Colors.white),
                 ),
                 child: Row(
@@ -122,8 +123,7 @@ class _MainPageState extends State<MainPage> {
                   ],
                 ),
               ),
-
-        actions: [
+              actions: [
                 // IconButton(
                 //   icon: SizedBox(
                 //     width: 24,
@@ -152,7 +152,7 @@ class _MainPageState extends State<MainPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ShoppingCartPage(),
+                              builder: (context) => const ShoppingCartPage(),
                             ),
                           );
                         },

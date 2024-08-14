@@ -38,7 +38,7 @@ class PopularPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ShoppingCartPage(),
+                          builder: (context) => const ShoppingCartPage(),
                         ),
                       );
                     },
