@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 final List<Map<String, dynamic>> popularProducts = [
   {
     'id': '10',
@@ -23,7 +22,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'imagePath': 'assets/images/card3.png',
     'title': 'Product 2',
     'weight': '100kg',
-    'price': 200.0,
+    'price': 300.0,
     'buttonText': 'Add to cart',
     'description': 'Shodai is location based food and grocery service. You will find everything healthy and hygienic from our wide range of products category. You are able to order your desired products which will be delivered right to your doorstep. Sometimes it is not possible for you to shop necessary things just for lack of time. Shodai can take responsibility to complete your shopping task so that you can spend your time with your loved ones.'
   },
@@ -32,7 +31,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'imagePath': 'assets/images/card4.png',
     'title': 'Product 3',
     'weight': '100kg',
-    'price': 200.0,
+    'price': 100.0,
     'buttonText': 'Add to cart',
     'description': 'dscdscds'
   },
@@ -41,7 +40,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'imagePath': 'assets/images/card5.png',
     'title': 'Nestle asd asdkjsd sdasdksd sdasd',
     'weight': '100kg',
-    'price': 200.0,
+    'price': 150.0,
     'buttonText': 'Add to cart',
     'description': 'dcjsncjnsdcj'
   },
@@ -50,7 +49,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'imagePath': 'assets/images/card6.png',
     'title': 'Nestle asd asdkjsd sdasdksd sdasd',
     'weight': '100kg',
-    'price': 200.0,
+    'price': 220.0,
     'buttonText': 'Add to cart',
     'description': 'dcjsncjnsdcj'
   },
@@ -59,7 +58,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'imagePath': 'assets/images/card7.png',
     'title': 'Nestle asd asdkjsd sdasdksd sdasd',
     'weight': '100kg',
-    'price': 200.0,
+    'price': 100.0,
     'buttonText': 'Add to cart',
     'description': 'dcjsncjnsdcj'
   },
@@ -68,7 +67,7 @@ final List<Map<String, dynamic>> popularProducts = [
     'imagePath': 'assets/images/card8.png',
     'title': 'Nestle asd asdkjsd sdasdksd sdasd',
     'weight': '100kg',
-    'price': 200.0,
+    'price': 2500.0,
     'buttonText': 'Add to cart',
     'description': 'dcjsncjnsdcj'
   },

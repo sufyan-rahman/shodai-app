@@ -7,9 +7,25 @@ import 'product_description.dart';
 import 'shopping_cart.dart';
 import 'widgets/sort-btn.dart';
 
-class InspiredbyPage extends StatelessWidget {
-  InspiredbyPage({super.key});
+class InspiredbyPage extends StatefulWidget {
+  const InspiredbyPage({super.key});
+
+  @override
+  State<InspiredbyPage> createState() => _InspiredbyPageState();
+}
+
+class _InspiredbyPageState extends State<InspiredbyPage> {
   final CartController cartController = Get.put(CartController());
+
+  List<Map<String, dynamic>> _filteredProducts =
+      inspiredProducts; // Initialize with all products
+
+  void _applyFilters(List<Map<String, dynamic>> filteredProducts) {
+    setState(() {
+      _filteredProducts = filteredProducts;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +117,8 @@ class InspiredbyPage extends StatelessWidget {
                     showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
-                      builder: (context) => const SortFilterBottomSheet(),
+                      builder: (context) =>  SortFilterBottomSheet(onApplyFilter: _applyFilters,
+                        products: inspiredProducts,),
                     );
                   },
                   child: const Text(
@@ -116,7 +133,7 @@ class InspiredbyPage extends StatelessWidget {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: '${inspiredProducts.length}',
+                        text: '${_filteredProducts.length}',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -139,7 +156,7 @@ class InspiredbyPage extends StatelessWidget {
           ),
           Expanded(
             child: GridView.builder(
-              itemCount: inspiredProducts.length,
+              itemCount: _filteredProducts.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 0.7,
@@ -147,7 +164,7 @@ class InspiredbyPage extends StatelessWidget {
                 mainAxisSpacing: 16.0,
               ),
               itemBuilder: (context, index) {
-                final product = inspiredProducts[index];
+                final product = _filteredProducts[index];
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(

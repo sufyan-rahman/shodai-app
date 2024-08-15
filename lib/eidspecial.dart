@@ -7,9 +7,24 @@ import 'product_description.dart';
 import 'product_list_data/eidspecial_products.dart';
 import 'shopping_cart.dart';
 
-class EidspecialPage extends StatelessWidget {
+class EidspecialPage extends StatefulWidget {
   EidspecialPage({super.key});
+
+  @override
+  State<EidspecialPage> createState() => _EidspecialPageState();
+}
+
+class _EidspecialPageState extends State<EidspecialPage> {
   final CartController cartController = Get.put(CartController());
+
+  List<Map<String, dynamic>> _filteredProducts =
+      eidproducts; // Initialize with all products
+
+  void _applyFilters(List<Map<String, dynamic>> filteredProducts) {
+    setState(() {
+      _filteredProducts = filteredProducts;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,7 +115,8 @@ class EidspecialPage extends StatelessWidget {
                     showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
-                      builder: (context) => const SortFilterBottomSheet(),
+                      builder: (context) =>  SortFilterBottomSheet(onApplyFilter: _applyFilters,
+                        products: eidproducts,),
                     );
                   },
                   child: const Text(
@@ -115,7 +131,7 @@ class EidspecialPage extends StatelessWidget {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: '${eidproducts.length}',
+                        text: '${_filteredProducts.length}',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -138,7 +154,7 @@ class EidspecialPage extends StatelessWidget {
           ),
           Expanded(
             child: GridView.builder(
-              itemCount: eidproducts.length,
+              itemCount: _filteredProducts.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 0.7,
@@ -146,7 +162,7 @@ class EidspecialPage extends StatelessWidget {
                 mainAxisSpacing: 16.0,
               ),
               itemBuilder: (context, index) {
-                final product = eidproducts[index];
+                final product = _filteredProducts[index];
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(

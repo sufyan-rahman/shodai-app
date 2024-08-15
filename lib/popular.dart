@@ -7,10 +7,25 @@ import 'controllers/cart_controller.dart';
 import 'product_list_data/popular_products.dart';
 import 'shopping_cart.dart';
 
-class PopularPage extends StatelessWidget {
-  PopularPage({super.key});
+class PopularPage extends StatefulWidget {
+  const PopularPage({super.key});
 
+  @override
+  State<PopularPage> createState() => _PopularPageState();
+}
+
+class _PopularPageState extends State<PopularPage> {
   final CartController cartController = Get.put(CartController());
+
+  List<Map<String, dynamic>> _filteredProducts =
+      popularProducts; // Initialize with all products
+
+  void _applyFilters(List<Map<String, dynamic>> filteredProducts) {
+    setState(() {
+      _filteredProducts = filteredProducts;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +116,10 @@ class PopularPage extends StatelessWidget {
                     showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
-                      builder: (context) => const SortFilterBottomSheet(),
+                      builder: (context) => SortFilterBottomSheet(
+                        onApplyFilter: _applyFilters,
+                        products: popularProducts,
+                      ),
                     );
                   },
                   child: const Text(
@@ -116,7 +134,7 @@ class PopularPage extends StatelessWidget {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: '${popularProducts.length}',
+                        text: '${_filteredProducts.length}',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -138,47 +156,48 @@ class PopularPage extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: GridView.builder(
-            itemCount: popularProducts.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.7,
-              crossAxisSpacing: 16.0,
-              mainAxisSpacing: 16.0,
-            ),
-            itemBuilder: (context, index) {
-              final product = popularProducts[index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProductDescription(
-                        id: product['id'],
-                        imagePath: product['imagePath'],
-                        title: product['title'],
-                        weight: product['weight'],
-                        price: product['price'],
-                        description: product['description'],
+            child: GridView.builder(
+              itemCount: _filteredProducts.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.7,
+                crossAxisSpacing: 16.0,
+                mainAxisSpacing: 16.0,
+              ),
+              itemBuilder: (context, index) {
+                final product = _filteredProducts[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductDescription(
+                          id: product['id'],
+                          imagePath: product['imagePath'],
+                          title: product['title'],
+                          weight: product['weight'],
+                          price: product['price'],
+                          description: product['description'],
+                        ),
                       ),
-                    ),
-                  );
-                },
-                child: ProductCard(
-                  id: product['id'],
-                  imagePath: product['imagePath'],
-                  title: product['title'],
-                  weight: product['weight'],
-                  price: product['price'],
-                  buttonText: product['buttonText'],
-                  onPressed: () {},
-                  // onFavoritePressed: () {
-                  //   // Handle favorite action
-                  // },
-                ),
-              );
-            },
-          ))
+                    );
+                  },
+                  child: ProductCard(
+                    id: product['id'],
+                    imagePath: product['imagePath'],
+                    title: product['title'],
+                    weight: product['weight'],
+                    price: product['price'],
+                    buttonText: product['buttonText'],
+                    onPressed: () {},
+                    // onFavoritePressed: () {
+                    //   // Handle favorite action
+                    // },
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

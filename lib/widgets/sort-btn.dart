@@ -1,10 +1,14 @@
-
 import 'package:flutter/material.dart';
 
 class SortFilterBottomSheet extends StatefulWidget {
-  const SortFilterBottomSheet({super.key});
+  final List<Map<String, dynamic>> products;
+  final Function(List<Map<String, dynamic>>)? onApplyFilter;
+
+  const SortFilterBottomSheet({super.key, required this.products, this.onApplyFilter});
+
+
   @override
-  _SortFilterBottomSheetState createState() => _SortFilterBottomSheetState();
+  State<SortFilterBottomSheet> createState() => _SortFilterBottomSheetState();
 }
 
 class _SortFilterBottomSheetState extends State<SortFilterBottomSheet> {
@@ -23,7 +27,26 @@ class _SortFilterBottomSheetState extends State<SortFilterBottomSheet> {
     'Snacks': false,
     'Safe Food': false,
   };
-  int _priceRangeValue = 2; // Default value for "৳ 100 - ৳ 200"
+  int _priceRangeValue = -1;
+
+  List<Map<String, dynamic>> _applyFilters() {
+    List<Map<String, dynamic>> filtered = widget.products;
+
+    // Filter by price range
+    if (_priceRangeValue == 1) {
+      filtered = filtered.where((product) => product['price'] <= 100).toList();
+    } else if (_priceRangeValue == 2) {
+      filtered = filtered
+          .where((product) => product['price'] > 100 && product['price'] <= 200)
+          .toList();
+    } else if (_priceRangeValue == 3) {
+      filtered = filtered.where((product) => product['price'] > 200).toList();
+    }
+
+    // You can also add more filters here (e.g., categories)
+
+    return filtered;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +57,8 @@ class _SortFilterBottomSheetState extends State<SortFilterBottomSheet> {
           mainAxisSize: MainAxisSize.min,
           children: [
             _buildHeader(context),
-            // Divider(),
             _buildSortBySection(),
-            // Divider(),
             _buildCategoriesSection(),
-            // Divider(),
             _buildPriceSection(),
             const SizedBox(height: 20),
             _buildActionButtons(context),
@@ -127,130 +147,17 @@ class _SortFilterBottomSheetState extends State<SortFilterBottomSheet> {
   Widget _buildCategoriesSection() {
     return ExpansionTile(
       title: const Text('Categories'),
-      children: [
-        RadioListTile(
-          title: const Text('Fruits and Vegetables'),
-          value: 1,
-          groupValue: _sortByValue,
-          onChanged: (value) {
+      children: _selectedCategories.keys.map((category) {
+        return CheckboxListTile(
+          title: Text(category),
+          value: _selectedCategories[category],
+          onChanged: (bool? value) {
             setState(() {
-              _sortByValue = value!;
+              _selectedCategories[category] = value!;
             });
           },
-        ),
-        RadioListTile(
-          title: const Text('Baby Care'),
-          value: 2,
-          groupValue: _sortByValue,
-          onChanged: (value) {
-            setState(() {
-              _sortByValue = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Household & Cleaning'),
-          value: 3,
-          groupValue: _sortByValue,
-          onChanged: (value) {
-            setState(() {
-              _sortByValue = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Meat & Fish'),
-          value: 4,
-          groupValue: _sortByValue,
-          onChanged: (value) {
-            setState(() {
-              _sortByValue = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Stationary'),
-          value: 5,
-          groupValue: _sortByValue,
-          onChanged: (value) {
-            setState(() {
-              _sortByValue = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Personal Care'),
-          value: 6,
-          groupValue: _sortByValue,
-          onChanged: (value) {
-            setState(() {
-              _sortByValue = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Grocery'),
-          value: 7,
-          groupValue: _sortByValue,
-          onChanged: (value) {
-            setState(() {
-              _sortByValue = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Beverages'),
-          value: 8,
-          groupValue: _sortByValue,
-          onChanged: (value) {
-            setState(() {
-              _sortByValue = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Bakery'),
-          value: 9,
-          groupValue: _sortByValue,
-          onChanged: (value) {
-            setState(() {
-              _sortByValue = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Dairy'),
-          value: 10,
-          groupValue: _sortByValue,
-          onChanged: (value) {
-            setState(() {
-              _sortByValue = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Snacks'),
-          value: 11,
-          groupValue: _sortByValue,
-          onChanged: (value) {
-            setState(() {
-              _sortByValue = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Safe Food'),
-          value: 12,
-          groupValue: _sortByValue,
-          onChanged: (value) {
-            setState(() {
-              _sortByValue = value!;
-            });
-          },
-        ),
-
-        // Add more categories as per the image
-      ],
+        );
+      }).toList(),
     );
   }
 
@@ -297,7 +204,11 @@ class _SortFilterBottomSheetState extends State<SortFilterBottomSheet> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         ElevatedButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            List<Map<String, dynamic>> filteredProducts = _applyFilters();
+            widget.onApplyFilter!(filteredProducts);
+            Navigator.pop(context);
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF7D7D00),
             padding:
