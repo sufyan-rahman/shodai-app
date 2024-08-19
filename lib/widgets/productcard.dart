@@ -116,7 +116,7 @@ class _ProductCardState extends State<ProductCard> {
                       iconSize: 25,
                       icon: Icon(
                         isFavorite ? Icons.favorite : Icons.favorite_border,
-                        color: isFavorite ? Colors.red : Colors.black,
+                        color: isFavorite ? Colors.green : Colors.black,
                       ),
                       onPressed: () {
                         setState(() {
@@ -158,27 +158,6 @@ class _ProductCardState extends State<ProductCard> {
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     cartController.addItem(item);
-            //   },
-            //   style: ElevatedButton.styleFrom(
-            //     foregroundColor: Colors.green,
-            //     backgroundColor: Colors.white,
-            //     elevation: 0.0,
-            //     side: const BorderSide(color: Color(0xFFB3B300)),
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(20.0),
-            //     ),
-            //   ),
-            //   child: Center(
-            //     child: Text(
-            //       widget.buttonText,
-            //       style: const TextStyle(color: Color(0xFFB3B300)),
-            //     ),
-            //   ),
-            // ),
-
             if (quantity == 0) ...[
               ElevatedButton(
                 onPressed: addToCart,
@@ -219,7 +198,8 @@ class _ProductCardState extends State<ProductCard> {
                       ),
                       Text(
                         '$quantity',
-                        style: const TextStyle(fontSize: 20, color: Colors.white),
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white),
                       ),
                       IconButton(
                         onPressed: incrementQuantity,

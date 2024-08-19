@@ -191,11 +191,12 @@ Widget _buildSocialDiscountSection() {
           ],
         ),
         SocialDiscountCard(
+          id: '90',
           imagePath: 'assets/images/card11.png',
           title: 'Padmar Elish - Hilsha Fish (900gm - 1KG)',
           weight: '1 Kg',
-          originalPrice: '৳260',
-          discountedPrice: '৳245',
+          originalPrice: '৳260.0',
+          discountedPrice: '৳245.0',
           progressPercentage: 30,
           endTime: endTime,
           onAddToCart: () {
@@ -204,11 +205,12 @@ Widget _buildSocialDiscountSection() {
         ),
         const Divider(height: 5.0),
         SocialDiscountCard(
+          id: '91',
           imagePath: 'assets/images/card12.png',
           title: 'Orange - কমলা',
           weight: '2 Kg',
-          originalPrice: '৳520',
-          discountedPrice: '৳400',
+          originalPrice: '৳520.0',
+          discountedPrice: '৳400.0',
           progressPercentage: 40,
           endTime: endTime,
           onAddToCart: () {
